@@ -1,1 +1,51 @@
-hello
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "license": "AGPL-version-3.0",
+  "private": false,
+  "engines": {
+    "node": ">= 14.0.0",
+    "npm": ">= 6.0.0"
+  },
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": "",
+  "keywords": [],
+  "author": {
+    "name": "Team 28",
+    "url": "https://github.com/jordaeday/326-project"
+  },
+  "contributors": [
+    {
+      "name": "Jordan Day",
+      "email": "jeday@umass.edu",
+      "github-user": "jordaeday"
+    },
+    {
+      "name": "Manya Phutela",
+      "email": "mphutela@umass.edu",
+      "github-user": "manyap062"
+    },
+    {
+      "name": "Noga Kojokaro",
+      "email": "nkojokaro@umass.edu",
+      "github-user": "nkojokaro2022"
+    }
+  ],
+  "scripts": {
+    "dev": "",
+    "test": ""
+  },
+  "dependencies": {
+
+  },
+  "devDependencies": {
+
+  }
+}
