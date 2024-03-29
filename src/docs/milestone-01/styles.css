@@ -29,6 +29,15 @@ section {
     display: none;
 }
 
+footer {
+    display: block;
+    margin: 0 auto;
+    background-color: #434C5E;
+    padding: 10px;
+    bottom: 0;
+    position: fixed;
+}
+
 #jordan {
     color: #EBCB8B;
 }

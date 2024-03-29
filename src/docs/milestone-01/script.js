@@ -20,12 +20,18 @@ document.addEventListener("DOMContentLoaded", function() {
         section.style.display = "block";
     }
 
+    const activePage = document.getElementById("active-page");
+
+    showSection("home"); // show home by default
+    activePage.innerHTML = "Active page: home";
+
     navLinks.forEach(link => {
         link.addEventListener("click", function(event) {
             event.preventDefault();
             const sectionId = link.getAttribute("href").substring(1); // removes the # from the href
             hideAll();
             showSection(sectionId);
+            activePage.innerHTML = "Active page: " + sectionId;
         });
     });
 });
