@@ -11,6 +11,8 @@ body {
     color: #E5E9F0;
     font-family: 'Nunito', sans-serif;
     padding: 10px;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 h1 {
@@ -21,6 +23,10 @@ h1 {
 h2 {
     color: #8FBCBB;
     text-align: center;
+}
+
+section {
+    display: none;
 }
 
 #jordan {
@@ -38,7 +44,7 @@ h2 {
 #nav-container {
     background-color: #434C5E;
     text-align: center;
-    width: fit-content;
+    width: 100%;
     padding: 10px;
     margin: auto;
 }
