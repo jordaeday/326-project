@@ -9,14 +9,18 @@
 body {
     background-color: #3B4252;
     color: #E5E9F0;
+    font-family: 'Nunito', sans-serif;
+    padding: 10px;
 }
 
 h1 {
-    color: #ECEFF4;
+    color: #81A1C1;
+    text-align: center;
 }
 
 h2 {
     color: #8FBCBB;
+    text-align: center;
 }
 
 #jordan {
@@ -31,10 +35,19 @@ h2 {
     color: #B48EAD;
 }
 
-nav a {
+#nav-container {
     background-color: #434C5E;
+    text-align: center;
+    width: fit-content;
+    padding: 10px;
+    margin: auto;
+}
+
+nav a {
     color: #E5E9F0;
     text-decoration: none;
+    margin: 0 5px;
+    padding: 10px;
 }
 
 nav a:hover {
