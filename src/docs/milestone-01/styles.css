@@ -1,31 +1,74 @@
+/*
+    Nord Styles and Colors
+    polar night (darkest to lightest):  #2E3440, #3B4252, #434C5E, #4C566A
+    snow storm (darkest to lightest):   #D8DEE9, #E5E9F0, #ECEFF4
+    frost (green to blue):              #8FBCBB, #88C0D0, #81A1C1, #5E81AC
+    aurora (red to purple):             #BF616A (red), #D08770 (orange), #EBCB8B (yellow), #A3BE8C (green), #B48EAD (purple)
+*/
+
 body {
-    color:rgb(76, 76, 76);
+    background-color: #3B4252;
+    color: #E5E9F0;
 }
 
 h1 {
-    color:darkslategray;
+    color: #ECEFF4;
 }
 
 h2 {
-    color:dimgrey;
+    color: #8FBCBB;
 }
 
 #jordan {
-    color:darkslateblue;
+    color: #EBCB8B;
 }
 
 #manya {
-    color:darkolivegreen
+    color: #A3BE8C;
 }
 
 #noga {
-    color:darkorchid;
+    color: #B48EAD;
 }
 
 nav a {
-
+    background-color: #434C5E;
+    color: #E5E9F0;
+    text-decoration: none;
 }
 
 nav a:hover {
-    
+    background-color: #4C566A;
+}
+
+.team-intros {
+    background-color: #4C566A;
+}
+
+img {
+    width: 100%;
+    transition: 0.5s ease;
+}
+
+.img-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: 0.5s ease;
+    -ms-transform: translate(-50%, -50%);
+    font-size: large;
+}
+
+.img-container {
+    position: relative;
+}
+
+.img-container:hover img {
+    opacity: 0.3;
+}
+
+.img-container:hover .img-text {
+    opacity: 1;
 }
