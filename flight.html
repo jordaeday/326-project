@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flights - Destination: Vacation</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Available Flights</h1>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="flights.html">Flights</a>
+        <a href="confirmation.html">Confirm Booking</a>
+      </nav>
+    </header>
+    <main>
+      <form id="flightForm">
+        <label for="fromAirport">From:</label>
+        <input type="text" id="fromAirport" name="fromAirport" />
+        <label for="toAirport">To:</label>
+        <input type="text" id="toAirport" name="toAirport" />
+        <label for="departureDate">Departure Date:</label>
+        <input type="date" id="departureDate" name="departureDate" />
+        <button type="submit">Search Flights</button>
+      </form>
+      <div id="flightsContainer"></div>
+    </main>
+    <footer>
+      <p>© 2024 Destination: Vacation</p>
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>
