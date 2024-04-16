@@ -1,0 +1,71 @@
+/*
+
+Theming colors:
+- background (light): #FCFCFC
+- background (dark): #5C6166
+- accent (blue): #0097B2
+- accent (yellow): #F2AE49
+
+*/
+
+body {
+    background-color: #FCFCFC;
+    color: #5C6166;
+    font-family: 'Albert Sans', sans-serif;
+    padding: 10px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    height: fit-content;
+    padding: 0 20px;
+}
+
+#title-section {
+    order: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 60px;
+    color: #0097B2;
+    width: fit-content;
+    padding: 0 20px 0 20px;
+}
+
+h2 {
+    font-weight: 500;
+    background-color: #0097B2;
+    color: #FCFCFC;
+    width: fit-content;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+nav {
+    order: 2;
+    width: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: left;
+    width: 100%;
+    gap: 10%;
+}
+
+nav > a {
+    color: #F2AE49;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 24px;
+    padding: 20px;
+}
