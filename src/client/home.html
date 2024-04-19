@@ -1,34 +1,60 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home - Destination: Vacation</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destination: Vacation</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
     <header>
-      <div id="title-section">
-        <h1>Destination: Vacation</h1>
-        <h2>Welcome to Destination: Vacation</h2>
-      </div>
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="quiz.html">Quiz</a>
-        <a href="flight.html">Flights</a>
-        <a href="confirmation.html">Confirm Booking</a>
-      </nav>
+        <h1>Welcome to Destination: Vacation</h1>
     </header>
-    <main>
-      <p>Start planning your perfect vacation today!</p>
-    </main>
+    <nav>
+        <a href="#" onclick="showPage('home')">Home</a>
+        <a href="#" onclick="showPage('quiz')">Quiz</a>
+        <a href="#" onclick="showPage('flights')">Flights</a>
+        <a href="#" onclick="showPage('confirmation')">Confirm Booking</a>
+    </nav>
+    <div id="content">
+        <!-- Home Section -->
+        <div id="home" class="page">
+            <p>Start planning your perfect vacation today!</p>
+        </div>
+        <!-- Quiz Section -->
+        <div id="quiz" class="page" style="display:none;">
+            <h1>Destination Quiz</h1>
+            <form id="quizForm">
+                <label for="interests">What are your interests?</label>
+                <input type="text" id="interests" name="interests">
+                <button type="submit">Submit</button>
+            </form>
+            <div id="resultDisplay"></div>
+        </div>
+        <!-- Flights Section -->
+        <div id="flights" class="page" style="display:none;">
+            <h1>Available Flights</h1>
+            <form id="flightForm">
+                <label for="fromAirport">From:</label>
+                <input type="text" id="fromAirport" name="fromAirport">
+                <label for="toAirport">To:</label>
+                <input type="text" id="toAirport" name="toAirport">
+                <label for="departureDate">Departure Date:</label>
+                <input type="date" id="departureDate" name="departureDate">
+                <button type="submit">Search Flights</button>
+            </form>
+            <div id="flightsContainer"></div>
+        </div>
+        <!-- Confirmation Section -->
+        <div id="confirmation" class="page" style="display:none;">
+            <h1>Confirm Your Booking</h1>
+            <button id="confirmButton">Confirm Booking</button>
+        </div>
+    </div>
     <footer>
-      <p>© 2024 Destination: Vacation</p>
+        <p>© 2024 Destination: Vacation</p>
     </footer>
     <script src="app.js"></script>
-  </body>
+</body>
 </html>
