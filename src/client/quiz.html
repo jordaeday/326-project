@@ -25,9 +25,119 @@
     </header>
     <main>
       <form id="quizForm">
-        <label for="interests">What are your interests?</label>
-        <input type="text" id="interests" name="interests" />
-        <button type="submit">Submit</button>
+        <fieldset>
+          <legend><strong>Location</strong></legend>
+          <div>
+            <label for="q1">What continent are you traveling out of?</label>
+            <select id="q1" name="q1">
+              <option value="Europe">Europe</option>
+              <option value="North America">North America</option>
+              <option value="South America">South America</option>
+              <option value="Asia">Asia</option>
+              <option value="Antarctica">Antarctica</option>
+              <option value="Australia">Australia</option>
+            </select>
+          </div>
+          <div>
+            <label for="q2">Do you want to leave your continent or stay close to home?</label>
+            <select id="q2" name="q2">
+              <option value="far">I want to travel far!</option>
+              <option value="close">Close to home is preferred!</option>
+            </select>
+          </div>
+          <div>
+            <label for="q3">How important is distance for you?</label>
+            <select id="q3" name="q3">
+              <option value="1">1 (Not important at all)</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 (Very important)</option>
+            </select>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend><strong>Weather</strong></legend>
+          <div>
+            <label for="q1">What month will you be traveling?</label>
+            <select id="q1" name="q1">
+              <option value="January">January</option>
+              <option value="February">February</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="August">August</option>
+              <option value="September">September</option>
+              <option value="October">October</option>
+              <option value="November">November</option>
+              <option value="December">December</option>
+            </select>
+          </div>
+          <div>
+            <label for="q2">What temperature range are you hoping for?</label>
+            <select id="q2" name="q2">
+              <option value="freezing">Colder than 35 degrees Fahrenheit</option>
+              <option value="cold">35 to 45 degrees Fahrenheit</option>
+              <option value="warm">45 to 70 degrees Fahrenheit</option>
+              <option value="hot">Warmer than 70 degrees Fahrenheit</option>
+            </select>
+          </div>
+          <div>
+            <label for="q3">How important is weather for you?</label>
+            <select id="q3" name="q3">
+              <option value="1">1 (Not important at all)</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 (Very important)</option>
+            </select>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend><strong>Language</strong></legend>
+          <p>Which languages would you like to be able to speak during your vacation?</p>
+          <div id="languageOptions">
+            <label><input type="checkbox" name="languages" value="English"> English</label><br>
+            <label><input type="checkbox" name="languages" value="Spanish"> Spanish</label><br>
+            <label><input type="checkbox" name="languages" value="French"> French</label><br>
+            <label><input type="checkbox" name="languages" value="Greek"> Greek</label><br>
+            <label><input type="checkbox" name="languages" value="Chinese"> Chinese</label><br>
+            <label><input type="checkbox" name="languages" value="Arabic"> Arabic</label><br>
+            <label><input type="checkbox" name="languages" value="Italian"> Italian</label><br>
+          </div>
+          <div>
+            <label for="q3">How important is speaking these languages for you?</label>
+            <select id="q3" name="q3">
+              <option value="1">1 (Not important at all)</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 (Very important)</option>
+            </select>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend><strong>Urban or Rural</strong></legend>
+          <div>
+            <label for="q1">Do you want an exciting city trip or a peaceful nature location?</label>
+            <select id="q1" name="q1">
+              <option value="rural">I want somewhere quiet and rural.</option>
+              <option value="urban">I want to explore a busy, booming city.</option>
+            </select>
+          </div>
+          <div>
+            <label for="q3">How important is this quality for you?</label>
+            <select id="q3" name="q3">
+              <option value="1">1 (Not important at all)</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 (Very important)</option>
+            </select>
+          </div>
+        </fieldset>
       </form>
       <div id="resultDisplay"></div>
     </main>
