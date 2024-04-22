@@ -1,174 +1,238 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Destination: Vacation</title>
     <link rel="stylesheet" href="styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
-</head>
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <header>
-        <h1>Welcome to Destination: Vacation</h1>
+      <h1>Welcome to Destination: Vacation</h1>
     </header>
     <nav>
-        <a href="#" onclick="showPage('home')">Home</a>
-        <a href="#" onclick="showPage('quiz')">Quiz</a>
-        <a href="#" onclick="showPage('flights')">Flights</a>
-        <a href="#" onclick="showPage('confirmation')">Confirm Booking</a>
+      <a href="#" onclick="showPage('home')">Home</a>
+      <a href="#" onclick="showPage('quiz')">Quiz</a>
+      <a href="#" onclick="showPage('flights')">Flights</a>
+      <a href="#" onclick="showPage('confirmation')">Confirm Booking</a>
     </nav>
     <div id="content">
-        <!-- Home Section -->
-        <div id="home" class="page">
-            <p>Start planning your perfect vacation today!</p>
+      <!-- Home Section -->
+      <div id="home" class="page">
+        <h2>Start planning your perfect vacation today!</h2>
+
+        <div class="slideshow-container">
+          <div class="imgSlides fade">
+            <div class="numberText">1 / 3</div>
+            <img src="images/img1.jpeg" style="width: 100%" />
+            <div class="text">Caption</div>
+          </div>
+          <div class="imgSlides fade">
+            <div class="numberText">2 / 3</div>
+            <img src="images/img2.jpeg" style="width: 100%" />
+            <div class="text">Caption 2</div>
+          </div>
+          <div class="imgSlides fade">
+            <div class="numberText">3 / 3</div>
+            <img src="images/img3.jpeg" style="width: 100%" />
+            <div class="text">Caption 3</div>
+          </div>
         </div>
-        <!-- Quiz Section -->
-        <div id="quiz" class="page">
-          <form id="quizForm">
-            <fieldset>
-                <legend><strong>Location</strong></legend>
-                <div>
-                  <label for="q1">What continent are you traveling out of?</label>
-                  <select id="q1" name="q1">
-                    <option value="Europe">Europe</option>
-                    <option value="North America">North America</option>
-                    <option value="South America">South America</option>
-                    <option value="Asia">Asia</option>
-                    <option value="Antarctica">Antarctica</option>
-                    <option value="Australia">Australia</option>
-                  </select>
-                </div>
-                <div>
-                  <label for="q2">Do you want to leave your continent or stay close to home?</label>
-                  <select id="q2" name="q2">
-                    <option value="far">I want to travel far!</option>
-                    <option value="close">Close to home is preferred!</option>
-                  </select>
-                </div>
-                <div>
-                  <label for="q3">How important is distance for you?</label>
-                  <select id="q3" name="q3">
-                    <option value="1">1 (Not important at all)</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5 (Very important)</option>
-                  </select>
-                </div>
-              </fieldset>
-              <fieldset>
-                <legend><strong>Weather</strong></legend>
-                <div>
-                  <label for="q4">What month will you be traveling?</label>
-                  <select id="q4" name="q4">
-                    <option value="January">January</option>
-                    <option value="February">February</option>
-                    <option value="March">March</option>
-                    <option value="April">April</option>
-                    <option value="May">May</option>
-                    <option value="June">June</option>
-                    <option value="July">July</option>
-                    <option value="August">August</option>
-                    <option value="September">September</option>
-                    <option value="October">October</option>
-                    <option value="November">November</option>
-                    <option value="December">December</option>
-                  </select>
-                </div>
-                <div>
-                  <label for="q5">What temperature range are you hoping for?</label>
-                  <select id="q5" name="q5">
-                    <option value="freezing">Colder than 35 degrees Fahrenheit</option>
-                    <option value="cold">35 to 45 degrees Fahrenheit</option>
-                    <option value="warm">45 to 70 degrees Fahrenheit</option>
-                    <option value="hot">Warmer than 70 degrees Fahrenheit</option>
-                  </select>
-                </div>
-                <div>
-                  <label for="q6">How important is weather for you?</label>
-                  <select id="q6" name="q6">
-                    <option value="1">1 (Not important at all)</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5 (Very important)</option>
-                  </select>
-                </div>
-              </fieldset>
-              <fieldset>
-                <legend><strong>Language</strong></legend>
-                <p>Which languages would you like to be able to speak during your vacation?</p>
-                <div id="languageOptions">
-                  <label><input type="checkbox" name="languages" value="English"> English</label><br>
-                  <label><input type="checkbox" name="languages" value="Spanish"> Spanish</label><br>
-                  <label><input type="checkbox" name="languages" value="French"> French</label><br>
-                  <label><input type="checkbox" name="languages" value="Greek"> Greek</label><br>
-                  <label><input type="checkbox" name="languages" value="Chinese"> Chinese</label><br>
-                  <label><input type="checkbox" name="languages" value="Arabic"> Arabic</label><br>
-                  <label><input type="checkbox" name="languages" value="Italian"> Italian</label><br>
-                </div>
-                <div>
-                  <label for="q7">How important is speaking these languages for you?</label>
-                  <select id="q7" name="q7">
-                    <option value="1">1 (Not important at all)</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5 (Very important)</option>
-                  </select>
-                </div>
-              </fieldset>
-              <fieldset>
-                <legend><strong>Relaxation or Adventure</strong></legend>
-                <div>
-                  <label for="q8">What kind of activities are you looking for?</label>
-                  <select id="q8" name="q8">
-                    <option value="rural">I want somewhere quiet and rural.</option>
-                    <option value="urban">I want to explore a busy, booming city.</option>
-                    <option value="beach">I want to relax by an ocean.</option>
-                    <option value="hike">I want to hike and adventure.</option>
-                  </select>
-                </div>
-                <div>
-                  <label for="q9">How important is this quality for you?</label>
-                  <select id="q9" name="q9">
-                    <option value="1">1 (Not important at all)</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5 (Very important)</option>
-                  </select>
-                </div>
-              </fieldset>
-              <button type="submit">Submit</button>
-            </form>
+        <div style="text-align: center">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
         </div>
-        <!-- Flights Section -->
-        <div id="flights" class="page">
-          <h1>Available Flights</h1>
-          <form id="flightForm">
-              <label for="fromAirport">From:</label>
-              <input type="text" id="fromAirport" name="fromAirport">
-              <label for="toAirport">To:</label>
-              <input type="text" id="toAirport" name="toAirport">
-              <label for="departureDate">Departure Date:</label>
-              <input type="date" id="departureDate" name="departureDate">
-              <button type="submit">Search Flights</button>
-          </form>
-          <div id="flightsContainer"></div>
-        </div>      
-        <!-- Confirmation Section -->
-        <div id="confirmation" class="page">
-            <h1>Confirm Your Booking</h1>
-            <button id="confirmButton">Confirm Booking</button>
-        </div>
+      </div>
+      <!-- Quiz Section -->
+      <div id="quiz" class="page">
+        <form id="quizForm">
+          <fieldset>
+            <legend><strong>Location</strong></legend>
+            <div>
+              <label for="q1">What continent are you traveling out of?</label>
+              <select id="q1" name="q1">
+                <option value="Europe">Europe</option>
+                <option value="North America">North America</option>
+                <option value="South America">South America</option>
+                <option value="Asia">Asia</option>
+                <option value="Antarctica">Antarctica</option>
+                <option value="Australia">Australia</option>
+              </select>
+            </div>
+            <div>
+              <label for="q2"
+                >Do you want to leave your continent or stay close to
+                home?</label
+              >
+              <select id="q2" name="q2">
+                <option value="far">I want to travel far!</option>
+                <option value="close">Close to home is preferred!</option>
+              </select>
+            </div>
+            <div>
+              <label for="q3">How important is distance for you?</label>
+              <select id="q3" name="q3">
+                <option value="1">1 (Not important at all)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (Very important)</option>
+              </select>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend><strong>Weather</strong></legend>
+            <div>
+              <label for="q4">What month will you be traveling?</label>
+              <select id="q4" name="q4">
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+              </select>
+            </div>
+            <div>
+              <label for="q5">What temperature range are you hoping for?</label>
+              <select id="q5" name="q5">
+                <option value="freezing">
+                  Colder than 35 degrees Fahrenheit
+                </option>
+                <option value="cold">35 to 45 degrees Fahrenheit</option>
+                <option value="warm">45 to 70 degrees Fahrenheit</option>
+                <option value="hot">Warmer than 70 degrees Fahrenheit</option>
+              </select>
+            </div>
+            <div>
+              <label for="q6">How important is weather for you?</label>
+              <select id="q6" name="q6">
+                <option value="1">1 (Not important at all)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (Very important)</option>
+              </select>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend><strong>Language</strong></legend>
+            <p>
+              Which languages would you like to be able to speak during your
+              vacation?
+            </p>
+            <div id="languageOptions">
+              <label
+                ><input type="checkbox" name="languages" value="English" />
+                English</label
+              ><br />
+              <label
+                ><input type="checkbox" name="languages" value="Spanish" />
+                Spanish</label
+              ><br />
+              <label
+                ><input type="checkbox" name="languages" value="French" />
+                French</label
+              ><br />
+              <label
+                ><input type="checkbox" name="languages" value="Greek" />
+                Greek</label
+              ><br />
+              <label
+                ><input type="checkbox" name="languages" value="Chinese" />
+                Chinese</label
+              ><br />
+              <label
+                ><input type="checkbox" name="languages" value="Arabic" />
+                Arabic</label
+              ><br />
+              <label
+                ><input type="checkbox" name="languages" value="Italian" />
+                Italian</label
+              ><br />
+            </div>
+            <div>
+              <label for="q7"
+                >How important is speaking these languages for you?</label
+              >
+              <select id="q7" name="q7">
+                <option value="1">1 (Not important at all)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (Very important)</option>
+              </select>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend><strong>Relaxation or Adventure</strong></legend>
+            <div>
+              <label for="q8"
+                >What kind of activities are you looking for?</label
+              >
+              <select id="q8" name="q8">
+                <option value="rural">I want somewhere quiet and rural.</option>
+                <option value="urban">
+                  I want to explore a busy, booming city.
+                </option>
+                <option value="beach">I want to relax by an ocean.</option>
+                <option value="hike">I want to hike and adventure.</option>
+              </select>
+            </div>
+            <div>
+              <label for="q9">How important is this quality for you?</label>
+              <select id="q9" name="q9">
+                <option value="1">1 (Not important at all)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (Very important)</option>
+              </select>
+            </div>
+          </fieldset>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <!-- Flights Section -->
+      <div id="flights" class="page">
+        <h1>Available Flights</h1>
+        <form id="flightForm">
+          <label for="fromAirport">From:</label>
+          <input type="text" id="fromAirport" name="fromAirport" />
+          <label for="toAirport">To:</label>
+          <input type="text" id="toAirport" name="toAirport" />
+          <label for="departureDate">Departure Date:</label>
+          <input type="date" id="departureDate" name="departureDate" />
+          <button type="submit">Search Flights</button>
+        </form>
+        <div id="flightsContainer"></div>
+      </div>
+      <!-- Confirmation Section -->
+      <div id="confirmation" class="page">
+        <h1>Confirm Your Booking</h1>
+        <button id="confirmButton">Confirm Booking</button>
+      </div>
     </div>
     <footer>
-        <p>© 2024 Destination: Vacation</p>
+      <p>© 2024 Destination: Vacation</p>
     </footer>
     <script src="app.js"></script>
-</body>
+  </body>
 </html>
