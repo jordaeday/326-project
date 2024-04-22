@@ -69,26 +69,55 @@ function showPage(pageId) {
     },
   ];
 
-  //event listener for submission 
-  document.getElementById("quizForm").addEventListener("submit", submission);
+//event listener for submission 
+document.getElementById("quizForm").addEventListener("submit", submission);
 
-  function submission(event) {
-    event.preventDefault(); //prevent form submission
+function submission(event) {
+    event.preventDefault(); // Prevent form submission
 
-    //make sure button works
+    // Log to console for debugging
     console.log("Quiz submitted!");
 
     const formData = new FormData(quizForm);
 
-    //convert to array
+    // Convert FormData to an array of objects
     const quizResponses = Array.from(formData, ([name, value]) => ({ name, value }));
     console.log(quizResponses);
 
-    for (location in location) {
-        calculateScore(location, quizResponses)
-    }
-    
-  }
+    // Loop through each location
+    locations.forEach(location => {
+        calculateScore(location, quizResponses);
+        console.log(location.score);
+    });
+}
 
-  
-  
+// Function to get value by name from responses array
+function getValueByName(name, responses) {
+    const item = responses.find(obj => obj.name === name);
+    return item ? item.value : null;
+}
+
+// Function to calculate score for each location
+function calculateScore(location, responses) {
+    // Location questions
+    const continentAnswer = getValueByName('q1', responses);
+    const locationContinent = location.about.continent[0]; // Assuming there's only one continent per location
+
+    if (getValueByName('q2', responses) === 'far') {
+        if (continentAnswer !== locationContinent) 
+            location.score += parseInt(getValueByName('q3', responses));
+    } else {
+        if (continentAnswer === locationContinent) 
+            location.score += parseInt(getValueByName('q3', responses));
+    }
+
+    // Weather (TODO later)
+
+    // Language questions
+    const languageAnswers = responses.filter(obj => obj.name === 'languages').map(obj => obj.value);
+    const locationLanguages = location.about.language;
+    if (languageAnswers.some(elem => locationLanguages.includes(elem)))
+        location.score += parseInt(getValueByName('q7', responses));
+
+    // Activities (TODO later)
+}
