@@ -70,6 +70,23 @@ nav > a {
     padding: 20px;
 }
 
+nav > a:hover {
+    color: #0097B2;
+}
+
 fieldset {
     margin-bottom: 20px; /* Add space below each fieldset */
 }  
+
+button {
+    background-color: #0097B2;
+    color: #FCFCFC;
+    font-weight: 600;
+    font-size: 24px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-right: 20px;
+}

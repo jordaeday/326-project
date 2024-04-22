@@ -2,10 +2,12 @@ function showPage(pageId) {
     // Hide all pages
     document.querySelectorAll(".page").forEach((page) => {
       page.style.display = "none";
+      page.classList.remove("active");
     });
   
     // Show the requested page
     document.getElementById(pageId).style.display = "block";
+    document.getElementById(pageId).classList.add("active");
   }
   
   // Initial display setup
