@@ -27,6 +27,7 @@
         </div>
         <!-- Quiz Section -->
         <div id="quiz" class="page">
+          <form id="quizForm">
             <fieldset>
                 <legend><strong>Location</strong></legend>
                 <div>
@@ -121,12 +122,14 @@
                 </div>
               </fieldset>
               <fieldset>
-                <legend><strong>Urban or Rural</strong></legend>
+                <legend><strong>Relaxation or Adventure</strong></legend>
                 <div>
-                  <label for="q8">Do you want an exciting city trip or a peaceful nature location?</label>
+                  <label for="q8">What kind of activities are you looking for?</label>
                   <select id="q8" name="q8">
                     <option value="rural">I want somewhere quiet and rural.</option>
                     <option value="urban">I want to explore a busy, booming city.</option>
+                    <option value="beach">I want to relax by an ocean.</option>
+                    <option value="hike">I want to hike and adventure.</option>
                   </select>
                 </div>
                 <div>
@@ -140,7 +143,9 @@
                   </select>
                 </div>
               </fieldset>
-          </div>
+              <button type="submit">Submit</button>
+            </form>
+        </div>
         <!-- Flights Section -->
         <div id="flights" class="page">
           <h1>Available Flights</h1>
@@ -154,7 +159,7 @@
               <button type="submit">Search Flights</button>
           </form>
           <div id="flightsContainer"></div>
-        </div>
+        </div>      
         <!-- Confirmation Section -->
         <div id="confirmation" class="page">
             <h1>Confirm Your Booking</h1>
