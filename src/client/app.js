@@ -17,8 +17,8 @@ const locations = [
   {
     name: "Tokyo",
     about: {
-      budget: "whatever",
-      weather: "weather",
+      budget: 157,
+      weather: "cloudy",
       tags: ["city", "unique", "electronics"],
       language: ["Japanese"],
       continent: ["Asia"],
@@ -28,8 +28,8 @@ const locations = [
   {
     name: "Paris",
     about: {
-      budget: "whatever",
-      weather: "weather",
+      budget: 252,
+      weather: "sunny",
       tags: ["romantic", "cultural", "art"],
       language: ["French"],
       continent: ["Europe"],
@@ -39,8 +39,8 @@ const locations = [
   {
     name: "Bora Bora",
     about: {
-      budget: "whatever",
-      weather: "weather",
+      budget: 163,
+      weather: "hot",
       tags: ["beach", "relaxation", "tropical"],
       language: ["English", "French"],
       continent: ["None"],
@@ -50,8 +50,8 @@ const locations = [
   {
     name: "Rome",
     about: {
-      budget: "whatever",
-      weather: "weather",
+      budget: 184,
+      weather: "cool",
       tags: ["cultural", "art", "city"],
       language: ["Italian"],
       continent: ["Europe"],
@@ -61,8 +61,8 @@ const locations = [
   {
     name: "Los Angeles",
     about: {
-      budget: "whatever",
-      weather: "weather",
+      budget: 258,
+      weather: "sunny",
       tags: ["tropical", "city", "cultural"],
       language: ["English"],
       continent: ["North America"],
@@ -147,7 +147,7 @@ function showImageSlide() {
   }
   slides[slideIndex - 1].style.display = "block";
   dots[slideIndex - 1].className += " active";
-  setTimeout(showImageSlide, 3500); // Change image every 2 seconds
+  setTimeout(showImageSlide, 3500); // Change image every 3.5 seconds
 }
 
 // Ensuring the slideshow starts when the document is loaded
