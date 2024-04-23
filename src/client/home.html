@@ -15,16 +15,17 @@
       href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap"
       rel="stylesheet"
     />
+    <script type="module" src="app.js"></script>
   </head>
   <body>
     <header>
       <h1>Welcome to Destination: Vacation</h1>
     </header>
     <nav>
-      <a href="#" onclick="showPage('home')">Home</a>
-      <a href="#" onclick="showPage('quiz')">Quiz</a>
-      <a href="#" onclick="showPage('flights')">Flights</a>
-      <a href="#" onclick="showPage('confirmation')">Confirm Booking</a>
+      <a href="#" id="homeLink">Home</a>
+      <a href="#" id="quizLink">Quiz</a>
+      <a href="#" id="flightsLink">Flights</a>
+      <a href="#" id="confirmationLink">Confirm Booking</a>
     </nav>
     <div id="content">
       <!-- Home Section -->
@@ -211,8 +212,28 @@
               </select>
             </div>
           </fieldset>
-          <button type="submit">Submit</button>
+          <button type="submit" onclick="showPage(results)">Submit</button>
         </form>
+      </div>
+      <!-- Results Section -->
+      <div id="results" class="page">
+        <h1>Your Results!</h1>
+        <div id="resultsList">
+        </div>
+        <div id="resultsContainer">
+          <div class="result">
+            <h2 id="destination">Destination</h2>
+            <p id="destinationText">example text</p>
+          </div>
+          <div class="result">
+            <h2 id="destination">Destination</h2>
+            <p id="destinationText">example text</p>
+          </div>
+          <div class="result">
+            <h2 id="destination">Destination</h2>
+            <p id="destinationText">example text</p>
+          </div>
+        </div>
       </div>
       <!-- Flights Section -->
       <div id="flights" class="page">
@@ -256,6 +277,5 @@
     <footer>
       <p>© 2024 Destination: Vacation</p>
     </footer>
-    <script src="app.js"></script>
   </body>
 </html>

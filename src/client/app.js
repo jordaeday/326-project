@@ -1,3 +1,5 @@
+import * as db from "./db.js";
+
 function showPage(pageId) {
   // Hide all pages
   document.querySelectorAll(".page").forEach((page) => {
@@ -10,66 +12,9 @@ function showPage(pageId) {
   document.getElementById(pageId).classList.add("active");
 }
 
+
 // Initial display setup
 showPage("home"); // Show home page by default
-
-const locations = [
-  {
-    name: "Tokyo",
-    about: {
-      budget: 157,
-      weather: "cloudy",
-      tags: ["city", "unique", "electronics"],
-      language: ["Japanese"],
-      continent: ["Asia"],
-    },
-    score: 0,
-  },
-  {
-    name: "Paris",
-    about: {
-      budget: 252,
-      weather: "sunny",
-      tags: ["romantic", "cultural", "art"],
-      language: ["French"],
-      continent: ["Europe"],
-    },
-    score: 0,
-  },
-  {
-    name: "Bora Bora",
-    about: {
-      budget: 163,
-      weather: "hot",
-      tags: ["beach", "relaxation", "tropical"],
-      language: ["English", "French"],
-      continent: ["None"],
-    },
-    score: 0,
-  },
-  {
-    name: "Rome",
-    about: {
-      budget: 184,
-      weather: "cool",
-      tags: ["cultural", "art", "city"],
-      language: ["Italian"],
-      continent: ["Europe"],
-    },
-    score: 0,
-  },
-  {
-    name: "Los Angeles",
-    about: {
-      budget: 258,
-      weather: "sunny",
-      tags: ["tropical", "city", "cultural"],
-      language: ["English"],
-      continent: ["North America"],
-    },
-    score: 0,
-  },
-];
 
 //event listener for submission
 document.getElementById("quizForm").addEventListener("submit", submission);
@@ -94,40 +39,37 @@ function submission(event) {
     calculateScore(location, quizResponses);
     console.log(location.score);
   });
+
+  // Add the scores to the database
+  locations.forEach((location) => {
+    db.put({
+      _id: location.name,
+      score: location.score,
+    });
+  });
+
+  // Store scores in local storage
+  localStorage.setItem("scores", JSON.stringify(locations));
+
+  // Redirect to the results page
+  showPage("results");
 }
 
-// Function to get value by name from responses array
-function getValueByName(name, responses) {
-  const item = responses.find((obj) => obj.name === name);
-  return item ? item.value : null;
-}
+// Event listener for when results page is shown
+document.getElementById("results").addEventListener("show", function () {
+  const scores = db.topLocations(3);
+  const sortedScores = scores.sort((a, b) => b.score - a.score);
 
-// Function to calculate score for each location
-function calculateScore(location, responses) {
-  // Location questions
-  const continentAnswer = getValueByName("q1", responses);
-  const locationContinent = location.about.continent[0]; // Assuming there's only one continent per location
+  const resultsList = document.getElementById("resultsList");
+  resultsList.innerHTML = ""; // Clear the list
 
-  if (getValueByName("q2", responses) === "far") {
-    if (continentAnswer !== locationContinent)
-      location.score += parseInt(getValueByName("q3", responses));
-  } else {
-    if (continentAnswer === locationContinent)
-      location.score += parseInt(getValueByName("q3", responses));
-  }
+  sortedScores.forEach((location) => {
+    const item = document.createElement("li");
+    item.textContent = `${location.name}: ${location.score}`;
+    resultsList.appendChild(item);
+  });
+});
 
-  // Weather (TODO later)
-
-  // Language questions
-  const languageAnswers = responses
-    .filter((obj) => obj.name === "languages")
-    .map((obj) => obj.value);
-  const locationLanguages = location.about.language;
-  if (languageAnswers.some((elem) => locationLanguages.includes(elem)))
-    location.score += parseInt(getValueByName("q7", responses));
-
-  // Activities (TODO later)
-}
 
 let slideIndex = 0;
 
@@ -153,4 +95,8 @@ function showImageSlide() {
 // Ensuring the slideshow starts when the document is loaded
 document.addEventListener("DOMContentLoaded", function () {
   showImageSlide();
+  document.getElementById("homeLink").addEventListener("click", () => showPage("home"));
+  document.getElementById("quizLink").addEventListener("click", () => showPage("quiz"));
+  document.getElementById("flightsLink").addEventListener("click", () => showPage("flights"));
+  document.getElementById("confirmationLink").addEventListener("click", () => showPage("confirmation"));
 });
