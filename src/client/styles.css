@@ -52,6 +52,13 @@ h2 {
   padding: 20px;
 }
 
+h3 {
+  font-size: 40px;
+  color: #0097b2;
+  width: fit-content;
+  padding: 0 20px 0 20px;
+}
+
 nav {
   order: 2;
   width: auto;
@@ -103,7 +110,7 @@ button {
 
 /* Captions */
 .text {
-  color: #5c6166;
+  color: #ffffff;
   font-size: 15px;
   padding: 8px 12px;
   position: absolute;
@@ -115,7 +122,7 @@ button {
 
 /* Slide number */
 .numberText {
-  color: #5c6166;
+  color: white;
   font-size: 12px;
   padding: 8px 12px;
   position: absolute;
@@ -135,7 +142,7 @@ button {
 }
 
 .active {
-  background-color: #0097b2;
+  background-color: #ffffff;
 }
 
 /* Fading animation */
