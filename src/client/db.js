@@ -4,7 +4,7 @@ import pouchdb from 'https://cdn.jsdelivr.net/npm/pouchdb@8.0.1/+esm'
 // Export
 export const db = new pouchdb("scores");
 
-const locations = [
+export const locations = [
     {
       name: "Tokyo",
       about: {
@@ -69,7 +69,7 @@ function getValueByName(name, responses) {
 }
   
 // Function to calculate score for each location
-function calculateScore(location, responses) {
+export function calculateScore(location, responses) {
 // Location questions
 const continentAnswer = getValueByName("q1", responses);
 const locationContinent = location.about.continent[0]; // Assuming there's only one continent per location

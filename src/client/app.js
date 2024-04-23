@@ -35,21 +35,21 @@ function submission(event) {
   console.log(quizResponses);
 
   // Loop through each location
-  locations.forEach((location) => {
-    calculateScore(location, quizResponses);
+  db.locations.forEach((location) => {
+    db.calculateScore(location, quizResponses);
     console.log(location.score);
   });
 
   // Add the scores to the database
-  locations.forEach((location) => {
-    db.put({
+  db.locations.forEach((location) => {
+    db.db.put({
       _id: location.name,
       score: location.score,
     });
   });
 
   // Store scores in local storage
-  localStorage.setItem("scores", JSON.stringify(locations));
+  localStorage.setItem("scores", JSON.stringify(db.locations));
 
   // Redirect to the results page
   showPage("results");
@@ -67,6 +67,7 @@ document.getElementById("results").addEventListener("show", function () {
     const item = document.createElement("li");
     item.textContent = `${location.name}: ${location.score}`;
     resultsList.appendChild(item);
+    //resultsList.appendChild(document.createElement("div").innerText="test");
   });
 });
 
