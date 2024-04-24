@@ -29,9 +29,9 @@ function displayResults() {
   resultsList.innerHTML = "";
 
   rankedLocations.forEach((location, index) => {
+    const listItem = document.createElement("div");
     const locScore = location.score;
     //console.log(location.name + " locScore value: " + location.score);
-    const listItem = document.createElement("div");
     listItem.innerHTML = `
     <div class="rank">${index + 1}</div>
     <div class="score-circle">${locScore}</div>
@@ -124,6 +124,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const flightsLink = document.getElementById("flightsLink");
   const confirmationLink = document.getElementById("confirmationLink");
   const quizForm = document.getElementById("quizForm");
+  const previousResultsButton = document.getElementById("previousResultsButton");
+  const backToQuizButton = document.getElementById("backToQuizButton");
+  const clearAnswersButton = document.getElementById("clearAnswersButton");
 
   // Navigation event listeners
   flightButton.addEventListener("click", () => showPage("flights"));
@@ -145,20 +148,41 @@ document.addEventListener("DOMContentLoaded", function () {
     showPage("confirmation");
   });
 
+  quizLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    showPage("quiz");
+  });
+
   // Quiz form event listener
   quizForm.addEventListener("submit", submission);
 
-  // Check for stored quiz responses and display results or show quiz
-  const storedResponses = localStorage.getItem("quizResponses");
-  if (storedResponses) {
-    quizLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      showPage("results");
-    });
-  } else {
-    quizLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      showPage("quiz");
-    });
-  }
+  previousResultsButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    showPage("results");
+  });
+
+  backToQuizButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    showPage("quiz");
+  });
+
+  clearAnswersButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    quizForm.reset();
+    db.clearScores();
+  });
+
+  // // Check for stored quiz responses and display results or show quiz
+  // const storedResponses = localStorage.getItem("quizResponses");
+  // if (storedResponses) {
+  //   quizLink.addEventListener("click", (e) => {
+  //     e.preventDefault();
+  //     showPage("results");
+  //   });
+  // } else {
+  //   quizLink.addEventListener("click", (e) => {
+  //     e.preventDefault();
+  //     showPage("quiz");
+  //   });
+  // }
 });

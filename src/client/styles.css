@@ -78,11 +78,12 @@ nav > a {
 }
 
 nav > a:hover {
-  color: #0097b2;
+  color: #f2b949;
 }
 
 fieldset {
-  margin-bottom: 20px; /* Add space below each fieldset */
+  margin-bottom: 10px; /* Add space below each fieldset */
+  margin-top: 10px;
 }
 
 button {
@@ -94,8 +95,7 @@ button {
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin: 20px;
 }
 
 .slideshow-container {
