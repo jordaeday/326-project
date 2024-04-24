@@ -174,6 +174,11 @@ export async function calculateAndStoreScores(quizResponses) {
   }
 }
 
+// Clear scores
+export function clearScores() {
+  locations.forEach((location) => {location.score = 0; }); 
+}
+
 // Return the top 3 locations and information about them
 export async function topLocations(num) {
   const response = await db.allDocs({

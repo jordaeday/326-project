@@ -47,6 +47,7 @@ function clearResults() {
   if (resultsList) {
     resultsList.innerHTML = ""; // Clear the results list in the DOM
   }
+  db.clearScores();
   showPage("quiz"); // Redirect to the quiz page
 }
 
