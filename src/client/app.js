@@ -73,6 +73,7 @@ async function submission(event) {
   console.log("Quiz submitted!");
 
   const formData = new FormData(quizForm);
+  db.clearScores();
 
   // Convert FormData to an array of objects
   const quizResponses = Array.from(formData, ([name, value]) => ({
