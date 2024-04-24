@@ -45,14 +45,25 @@ function displayResults() {
   rankedLocations.forEach((location, index) => {
     const listItem = document.createElement("div");
     const locScore = location.score;
-    //console.log(location.name + " locScore value: " + location.score);
-    listItem.innerHTML = `
-    <div class="rank">${index + 1}</div>
-    <div class="score-circle">${locScore}</div>
-    <div class="location-name" data-location="${location.name}">${location.name}</div>
+
+    // Start building the list item's HTML
+    let listItemHTML = `
+      <div class="rank">${index + 1}</div>
+      <div class="score-circle">${locScore}</div>
+      <div class="location-name" data-location="${location.name}">${location.name}</div>
     `;
+
+    // Adding a new div to contain the tags attribute for the locations
+    listItemHTML += '<div class="location-tags">'; 
+    location.about.tags.forEach(tag => {
+      listItemHTML += `<span class="tag">${tag}</span>`;
+    });
+    
+    listItemHTML += '</div>'; // Closing the tags container div
+    listItem.innerHTML = listItemHTML;
     resultsList.appendChild(listItem);
   });
+
   showPage("results");
 }
 
