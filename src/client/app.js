@@ -29,8 +29,9 @@ function displayResults() {
   resultsList.innerHTML = "";
 
   rankedLocations.forEach((location, index) => {
-    const locScore = (location.score / totalPoints).toFixed(0);
-    const listItem = document.createElement("li");
+    const locScore = location.score;
+    //console.log(location.name + " locScore value: " + location.score);
+    const listItem = document.createElement("div");
     listItem.innerHTML = `
     <div class="rank">${index + 1}</div>
     <div class="score-circle">${locScore}</div>
