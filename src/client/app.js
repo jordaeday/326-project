@@ -7,6 +7,20 @@ export function showPage(pageId) {
     page.classList.remove("active");
   });
 
+  // Populates dropdown for flights to locations in database
+  if (pageId === "flights") {
+    const toAirportSelect = document.getElementById("toAirport");
+    const options = db.locations;
+
+    for (let i = 0; i < options.length; i++) {
+      const opt = options[i];
+      const el = document.createElement("option");
+      el.textContent = opt.name;
+      el.value = opt;
+      toAirportSelect.appendChild(el);
+    }
+  }
+
   // Show the requested page
   document.getElementById(pageId).style.display = "block";
   document.getElementById(pageId).classList.add("active");
@@ -124,7 +138,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const flightsLink = document.getElementById("flightsLink");
   const confirmationLink = document.getElementById("confirmationLink");
   const quizForm = document.getElementById("quizForm");
-  const previousResultsButton = document.getElementById("previousResultsButton");
+  const previousResultsButton = document.getElementById(
+    "previousResultsButton"
+  );
   const backToQuizButton = document.getElementById("backToQuizButton");
   const clearAnswersButton = document.getElementById("clearAnswersButton");
 
