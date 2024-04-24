@@ -9,7 +9,7 @@ export const locations = [
     name: "Tokyo",
     about: {
       budget: 157,
-      weather: "cloudy",
+      weather: [40, 45, 50, 55, 65, 74, 80, 81, 75, 64, 55, 47], //sample data for now
       tags: ["city", "unique", "electronics"],
       language: ["Japanese"],
       continent: ["Asia"],
@@ -20,8 +20,8 @@ export const locations = [
     name: "Paris",
     about: {
       budget: 252,
-      weather: "sunny",
-      tags: ["romantic", "cultural", "art"],
+      weather: [40, 43, 48, 55, 65, 74, 72, 72, 63, 55, 48, 43], //sample data for now
+      tags: ["romantic", "cultural", "art", "city"],
       language: ["French"],
       continent: ["Europe"],
     },
@@ -31,7 +31,7 @@ export const locations = [
     name: "Bora Bora",
     about: {
       budget: 163,
-      weather: "hot",
+      weather: [77, 77, 77, 77, 77, 75, 75, 75, 75, 75, 76, 76], //sample data for now
       tags: ["beach", "relaxation", "tropical"],
       language: ["English", "French"],
       continent: ["None"],
@@ -42,7 +42,7 @@ export const locations = [
     name: "Rome",
     about: {
       budget: 184,
-      weather: "cool",
+      weather: [45, 46, 50, 55, 65, 73, 79, 79, 74, 60, 55, 47], //sample data for now
       tags: ["cultural", "art", "city"],
       language: ["Italian"],
       continent: ["Europe"],
@@ -53,7 +53,7 @@ export const locations = [
     name: "Los Angeles",
     about: {
       budget: 258,
-      weather: "sunny",
+      weather: [58, 59, 61, 63, 67, 70, 74, 76, 74, 70, 63, 59], //sample data for now
       tags: ["tropical", "city", "cultural"],
       language: ["English"],
       continent: ["North America"],
@@ -82,8 +82,24 @@ export function calculateScore(location, responses) {
       location.score += parseInt(getValueByName("q3", responses));
   }
 
-  // Weather (TODO later)
+  // Weather questions
+  const month = parseInt(getValueByName("q4", responses)); //month index in array of months
+  const temp = parseInt(location.about.weather[month]);
 
+  if (getValueByName("q5", responses) === "freezing") {
+    if (temp < 35)
+      location.score += parseInt(getValueByName("q6", responses));
+  }else if(getValueByName("q5", responses) === "cold") {
+    if (temp >= 35 && temp < 45)
+      location.score += parseInt(getValueByName("q6", responses));
+  }else if(getValueByName("q5", responses) === "warm") {
+    if (temp >= 45 && temp < 70)
+      location.score += parseInt(getValueByName("q6", responses));
+  }else{
+    if (temp < 75 )
+      location.score += parseInt(getValueByName("q6", responses));
+  }
+    
   // Language questions
   const languageAnswers = responses
     .filter((obj) => obj.name === "languages")
@@ -92,7 +108,24 @@ export function calculateScore(location, responses) {
   if (languageAnswers.some((elem) => locationLanguages.includes(elem)))
     location.score += parseInt(getValueByName("q7", responses));
 
-  // Activities (TODO later)
+  // Activity questions (vibe of area)
+  const vibe = getValueByName("q8", responses); // rural, urban, beach, or hike
+
+  if (vibe === "rural") {
+    if (location.about.tags.includes("relaxation"))
+      location.score += parseInt(getValueByName("q9", responses));
+  }else if (vibe === "urban") {
+    if (location.about.tags.includes("city"))
+      location.score += parseInt(getValueByName("q9", responses));
+  }else if (vibe === "beach") {
+    if (location.about.tags.includes("beach"))
+      location.score += parseInt(getValueByName("q9", responses));
+  }else{
+    if (location.about.tags.includes("cultural"))
+      location.score += parseInt(getValueByName("q9", responses));
+  }
+  
+  console.log(location.name + ": " + location.score); // check scores in console 
 }
 
 // Function to store/update location's score
