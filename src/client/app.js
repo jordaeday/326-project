@@ -1,6 +1,6 @@
 import * as db from "./db.js";
 
-function showPage(pageId) {
+export function showPage(pageId) {
   // Hide all pages
   document.querySelectorAll(".page").forEach((page) => {
     page.style.display = "none";
@@ -12,14 +12,45 @@ function showPage(pageId) {
   document.getElementById(pageId).classList.add("active");
 }
 
-
 // Initial display setup
 showPage("home"); // Show home page by default
 
-//event listener for submission
-document.getElementById("quizForm").addEventListener("submit", submission);
+//Calculates total points from quiz responses
+function calculateTotalPoints(responses) {
+  return responses.reduce((total, curr) => total + parseInt(curr.value), 0);
+}
 
-function submission(event) {
+// Call after quiz submitted and scores calculated
+function displayResults() {
+  const quizResponses = JSON.parse(localStorage.getItem("quizResponses"));
+  const totalPoints = calculateTotalPoints(quizResponses);
+  const rankedLocations = db.locations.sort((a, b) => b.score - a.score);
+  const resultsList = document.getElementById("resultsList");
+  resultsList.innerHTML = "";
+
+  rankedLocations.forEach((location, index) => {
+    const locScore = (location.score / totalPoints).toFixed(0);
+    const listItem = document.createElement("li");
+    listItem.innerHTML = `
+    <div class="rank">${index + 1}</div>
+    <div class="score-circle">${locScore}</div>
+    <div class="location-name" data-location="${location.name}">${location.name}</div>
+    `;
+    resultsList.appendChild(listItem);
+  });
+  showPage("results");
+}
+
+function clearResults() {
+  localStorage.removeItem("quizResponses"); // Remove the stored responses
+  const resultsList = document.getElementById("resultsList");
+  if (resultsList) {
+    resultsList.innerHTML = ""; // Clear the results list in the DOM
+  }
+  showPage("quiz"); // Redirect to the quiz page
+}
+
+async function submission(event) {
   event.preventDefault(); // Prevent form submission
 
   // Log to console for debugging
@@ -35,42 +66,29 @@ function submission(event) {
   console.log(quizResponses);
 
   // Loop through each location
-  db.locations.forEach((location) => {
-    db.calculateScore(location, quizResponses);
-    console.log(location.score);
-  });
-
-  // Add the scores to the database
-  db.locations.forEach((location) => {
-    db.db.put({
-      _id: location.name,
-      score: location.score,
-    });
-  });
-
-  // Store scores in local storage
-  localStorage.setItem("scores", JSON.stringify(db.locations));
-
-  // Redirect to the results page
-  showPage("results");
+  try {
+    await db.calculateAndStoreScores(quizResponses);
+    displayResults();
+  } catch (error) {
+    console.error("An error occured while submitting your quiz.");
+  }
 }
 
-// Event listener for when results page is shown
-document.getElementById("results").addEventListener("show", function () {
-  const scores = db.topLocations(3);
-  const sortedScores = scores.sort((a, b) => b.score - a.score);
+// // Event listener for when results page is shown
+// document.getElementById("results").addEventListener("show", function () {
+//   const scores = db.topLocations(3);
+//   const sortedScores = scores.sort((a, b) => b.score - a.score);
 
-  const resultsList = document.getElementById("resultsList");
-  resultsList.innerHTML = ""; // Clear the list
+//   const resultsList = document.getElementById("resultsList");
+//   resultsList.innerHTML = ""; // Clear the list
 
-  sortedScores.forEach((location) => {
-    const item = document.createElement("li");
-    item.textContent = `${location.name}: ${location.score}`;
-    resultsList.appendChild(item);
-    //resultsList.appendChild(document.createElement("div").innerText="test");
-  });
-});
-
+//   sortedScores.forEach((location) => {
+//     const item = document.createElement("li");
+//     item.textContent = `${location.name}: ${location.score}`;
+//     resultsList.appendChild(item);
+//     //resultsList.appendChild(document.createElement("div").innerText="test");
+//   });
+// });
 
 let slideIndex = 0;
 
@@ -93,11 +111,52 @@ function showImageSlide() {
   setTimeout(showImageSlide, 3500); // Change image every 3.5 seconds
 }
 
-// Ensuring the slideshow starts when the document is loaded
 document.addEventListener("DOMContentLoaded", function () {
   showImageSlide();
-  document.getElementById("homeLink").addEventListener("click", () => showPage("home"));
-  document.getElementById("quizLink").addEventListener("click", () => showPage("quiz"));
-  document.getElementById("flightsLink").addEventListener("click", () => showPage("flights"));
-  document.getElementById("confirmationLink").addEventListener("click", () => showPage("confirmation"));
+
+  const flightButton = document.getElementById("flightButton");
+  const quizButton = document.getElementById("quizButton");
+  const clearResultsButton = document.getElementById("clearResultsButton");
+  const homeLink = document.getElementById("homeLink");
+  const quizLink = document.getElementById("quizLink");
+  const flightsLink = document.getElementById("flightsLink");
+  const confirmationLink = document.getElementById("confirmationLink");
+  const quizForm = document.getElementById("quizForm");
+
+  // Navigation event listeners
+  flightButton.addEventListener("click", () => showPage("flights"));
+  quizButton.addEventListener("click", () => showPage("quiz"));
+  clearResultsButton.addEventListener("click", clearResults);
+
+  homeLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    showPage("home");
+  });
+
+  flightsLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    showPage("flights");
+  });
+
+  confirmationLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    showPage("confirmation");
+  });
+
+  // Quiz form event listener
+  quizForm.addEventListener("submit", submission);
+
+  // Check for stored quiz responses and display results or show quiz
+  const storedResponses = localStorage.getItem("quizResponses");
+  if (storedResponses) {
+    quizLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      showPage("results");
+    });
+  } else {
+    quizLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      showPage("quiz");
+    });
+  }
 });

@@ -32,10 +32,10 @@
       <div id="home" class="page">
         <h3>Start planning your perfect vacation today!</h3>
 
-        <button onclick="showPage('flights')" style="margin-bottom: 20px">
+        <button id="flightButton" style="margin-bottom: 20px">
           I already have a destination in mind ➡️
         </button>
-        <button onclick="showPage('quiz')" style="margin-bottom: 20px">
+        <button id="quizButton" style="margin-bottom: 20px">
           Help me decide where to go ➡️
         </button>
 
@@ -212,14 +212,13 @@
               </select>
             </div>
           </fieldset>
-          <button type="submit" onclick="showPage(results)">Submit</button>
+          <button type="submit" id="submitQuiz">Submit</button>
         </form>
       </div>
       <!-- Results Section -->
       <div id="results" class="page">
         <h1>Your Results!</h1>
-        <div id="resultsList">
-        </div>
+        <div id="resultsList"></div>
         <div id="resultsContainer">
           <div class="result">
             <h2 id="destination">Destination</h2>
@@ -232,6 +231,7 @@
           <div class="result">
             <h2 id="destination">Destination</h2>
             <p id="destinationText">example text</p>
+            <button id="clearResultsButton">Clear Quiz Results</button>
           </div>
         </div>
       </div>
@@ -254,23 +254,23 @@
         <h1>Confirm Your Booking</h1>
         <fieldset>
           <legend>Your Destination</legend>
-          <p> exmaple text </p>
+          <p>exmaple text</p>
         </fieldset>
         <fieldset>
           <legend>Your Flight</legend>
-          <p> exmaple text </p>
+          <p>exmaple text</p>
         </fieldset>
         <fieldset>
           <legend>Your Budget</legend>
-          <p> exmaple text </p>
+          <p>exmaple text</p>
         </fieldset>
         <fieldset>
           <legend>Length of Stay</legend>
-          <p> exmaple text </p>
+          <p>exmaple text</p>
         </fieldset>
         <fieldset>
           <legend>Location Information</legend>
-          <p> exmaple text </p>
+          <p>exmaple text</p>
         </fieldset>
       </div>
     </div>

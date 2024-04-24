@@ -142,7 +142,7 @@ button {
 }
 
 .active {
-  background-color: #ffffff;
+  background-color: #fcfcfc;
 }
 
 /* Fading animation */
@@ -158,4 +158,39 @@ button {
   to {
     opacity: 1;
   }
+}
+
+.rank,
+.score-circle,
+.location-name {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.rank {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.score-circle {
+  width: 40px;
+  height: 40px;
+  line-height: 40px; /* Aligns text vertically */
+  border-radius: 50%;
+  background-color: #0097b2;
+  color: #fcfcfc;
+  text-align: center;
+  margin-right: 10px;
+}
+
+.location-name {
+  padding: 10px;
+  background-color: #f2ae49;
+  color: #5c6166;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.location-name:hover {
+  background-color: #f2b949; /* Slightly lighter color on hover */
 }
