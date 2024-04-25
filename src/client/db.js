@@ -1,4 +1,4 @@
-/** Import statements */ 
+/** Import statements */
 import pouchdb from "https://cdn.jsdelivr.net/npm/pouchdb@8.0.1/+esm";
 
 /**
@@ -16,7 +16,9 @@ export const locations = [
     name: "Tokyo",
     about: {
       budget: 157,
-      weather: [40, 45, 50, 55, 65, 74, 80, 81, 75, 64, 55, 47], /**sample data for now */
+      weather: [
+        40, 45, 50, 55, 65, 74, 80, 81, 75, 64, 55, 47,
+      ] /**sample data for now */,
       tags: ["city", "unique", "electronics"],
       language: ["Japanese"],
       continent: ["Asia"],
@@ -27,7 +29,9 @@ export const locations = [
     name: "Paris",
     about: {
       budget: 252,
-      weather: [40, 43, 48, 55, 65, 74, 72, 72, 63, 55, 48, 43], /**sample data for now */
+      weather: [
+        40, 43, 48, 55, 65, 74, 72, 72, 63, 55, 48, 43,
+      ] /**sample data for now */,
       tags: ["romantic", "cultural", "art", "city"],
       language: ["French"],
       continent: ["Europe"],
@@ -38,7 +42,9 @@ export const locations = [
     name: "Bora Bora",
     about: {
       budget: 163,
-      weather: [77, 77, 77, 77, 77, 75, 75, 75, 75, 75, 76, 76], /**sample data for now */
+      weather: [
+        77, 77, 77, 77, 77, 75, 75, 75, 75, 75, 76, 76,
+      ] /**sample data for now */,
       tags: ["beach", "relaxation", "tropical"],
       language: ["English", "French"],
       continent: ["None"],
@@ -49,7 +55,9 @@ export const locations = [
     name: "Rome",
     about: {
       budget: 184,
-      weather: [45, 46, 50, 55, 65, 73, 79, 79, 74, 60, 55, 47], /**sample data for now */
+      weather: [
+        45, 46, 50, 55, 65, 73, 79, 79, 74, 60, 55, 47,
+      ] /**sample data for now */,
       tags: ["cultural", "art", "city"],
       language: ["Italian"],
       continent: ["Europe"],
@@ -60,12 +68,38 @@ export const locations = [
     name: "Los Angeles",
     about: {
       budget: 258,
-      weather: [58, 59, 61, 63, 67, 70, 74, 76, 74, 70, 63, 59],/**sample data for now */
+      weather: [
+        58, 59, 61, 63, 67, 70, 74, 76, 74, 70, 63, 59,
+      ] /**sample data for now */,
       tags: ["tropical", "city", "cultural"],
       language: ["English"],
       continent: ["North America"],
     },
     score: 0,
+  },
+];
+
+export const mockFlights = [
+  {
+    flightNumber: "FL123",
+    airline: "United Airlines",
+    departureTime: "10:00 AM",
+    arrivalTime: "12:00 PM",
+    price: "$150",
+  },
+  {
+    flightNumber: "FL456",
+    airline: "JetBlue Airlines",
+    departureTime: "1:00 PM",
+    arrivalTime: "3:00 PM",
+    price: "$200",
+  },
+  {
+    flightNumber: "FL789",
+    airline: "Delta Airlines",
+    departureTime: "4:00 PM",
+    arrivalTime: "6:00 PM",
+    price: "$250",
   },
 ];
 
@@ -88,7 +122,9 @@ function getValueByName(name, responses) {
 export function calculateScore(location, responses) {
   /** Location questions */
   const continentAnswer = getValueByName("q1", responses);
-  const locationContinent = location.about.continent[0]; /**Assuming there's only one continent per location */
+  const locationContinent =
+    location.about
+      .continent[0]; /**Assuming there's only one continent per location */
 
   if (getValueByName("q2", responses) === "far") {
     if (continentAnswer !== locationContinent)
@@ -99,23 +135,23 @@ export function calculateScore(location, responses) {
   }
 
   /** Weather questions */
-  const month = parseInt(getValueByName("q4", responses)); /**month index in array of months */
+  const month = parseInt(
+    getValueByName("q4", responses)
+  ); /**month index in array of months */
   const temp = parseInt(location.about.weather[month]);
 
   if (getValueByName("q5", responses) === "freezing") {
-    if (temp < 35)
-      location.score += parseInt(getValueByName("q6", responses));
-  }else if(getValueByName("q5", responses) === "cold") {
+    if (temp < 35) location.score += parseInt(getValueByName("q6", responses));
+  } else if (getValueByName("q5", responses) === "cold") {
     if (temp >= 35 && temp < 45)
       location.score += parseInt(getValueByName("q6", responses));
-  }else if(getValueByName("q5", responses) === "warm") {
+  } else if (getValueByName("q5", responses) === "warm") {
     if (temp >= 45 && temp < 70)
       location.score += parseInt(getValueByName("q6", responses));
-  }else{
-    if (temp < 75 )
-      location.score += parseInt(getValueByName("q6", responses));
+  } else {
+    if (temp < 75) location.score += parseInt(getValueByName("q6", responses));
   }
-    
+
   /** Language questions */
   const languageAnswers = responses
     .filter((obj) => obj.name === "languages")
@@ -125,23 +161,26 @@ export function calculateScore(location, responses) {
     location.score += parseInt(getValueByName("q7", responses));
 
   /** Activity questions (vibe of area) */
-  const vibe = getValueByName("q8", responses); /**rural, urban, beach, or hike */
+  const vibe = getValueByName(
+    "q8",
+    responses
+  ); /**rural, urban, beach, or hike */
 
   if (vibe === "rural") {
     if (location.about.tags.includes("relaxation"))
       location.score += parseInt(getValueByName("q9", responses));
-  }else if (vibe === "urban") {
+  } else if (vibe === "urban") {
     if (location.about.tags.includes("city"))
       location.score += parseInt(getValueByName("q9", responses));
-  }else if (vibe === "beach") {
+  } else if (vibe === "beach") {
     if (location.about.tags.includes("beach"))
       location.score += parseInt(getValueByName("q9", responses));
-  }else{
+  } else {
     if (location.about.tags.includes("cultural"))
       location.score += parseInt(getValueByName("q9", responses));
   }
-  
-  console.log(location.name + ": " + location.score); /**check scores in console  */
+
+  console.log(location.name + ": " + location.score); // check scores in console
 }
 
 /**
@@ -202,7 +241,9 @@ export async function calculateAndStoreScores(quizResponses) {
  * Clears scores for all locations, resetting them to zero.
  */
 export function clearScores() {
-  locations.forEach((location) => {location.score = 0; }); 
+  locations.forEach((location) => {
+    location.score = 0;
+  });
 }
 
 /**

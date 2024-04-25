@@ -136,21 +136,6 @@ async function submission(event) {
   }
 }
 
-/** document.getElementById("results").addEventListener("show", function () {
-  const scores = db.topLocations(3);
-  const sortedScores = scores.sort((a, b) => b.score - a.score);
-
-  const resultsList = document.getElementById("resultsList");
-  resultsList.innerHTML = ""; // Clear the list
-
-  sortedScores.forEach((location) => {
-    const item = document.createElement("li");
-    item.textContent = `${location.name}: ${location.score}`;
-    resultsList.appendChild(item);
-    //resultsList.appendChild(document.createElement("div").innerText="test");
-  });
-}); */
-
 let slideIndex = 0;
 
 /**
@@ -175,31 +160,6 @@ function showImageSlide() {
   setTimeout(showImageSlide, 3500); /** Change image every 3.5 seconds */
 }
 
-/** Static flight data */
-const mockFlights = [
-  {
-    flightNumber: "FL123",
-    airline: "United Airlines",
-    departureTime: "10:00 AM",
-    arrivalTime: "12:00 PM",
-    price: "$150",
-  },
-  {
-    flightNumber: "FL456",
-    airline: "JetBlue Airlines",
-    departureTime: "1:00 PM",
-    arrivalTime: "3:00 PM",
-    price: "$200",
-  },
-  {
-    flightNumber: "FL789",
-    airline: "Delta Airlines",
-    departureTime: "4:00 PM",
-    arrivalTime: "6:00 PM",
-    price: "$250",
-  },
-];
-
 /**
  * Displays flight results based on the provided search parameters.
  * @param {string} fromCity - Departure city.
@@ -207,6 +167,13 @@ const mockFlights = [
  * @param {string} date - Flight date.
  */
 function showFlightResults(fromCity, toCity, date) {
+  if (document.getElementById("resultFrom").textContent === "") {
+    alert("Please enter departing location.");
+  }
+  if (document.getElementById("resultDate").textContent === "") {
+    alert("Please enter departure date.");
+  }
+
   document.getElementById("resultFrom").textContent = fromCity;
   document.getElementById("resultTo").textContent = toCity;
   console.log(toCity);
@@ -215,7 +182,7 @@ function showFlightResults(fromCity, toCity, date) {
   const flightsList = document.getElementById("flightsList");
   flightsList.innerHTML = ""; /** Clear previous results */
 
-  mockFlights.forEach((flight) => {
+  db.mockFlights.forEach((flight) => {
     const flightItem = document.createElement("div");
     flightItem.classList.add("flight-item");
     flightItem.innerHTML = `
@@ -259,7 +226,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const flightButton = document.getElementById("flightButton");
   const quizButton = document.getElementById("quizButton");
   const clearResultsButton = document.getElementById("clearResultsButton");
-  const searchFlightsButton = document.getElementById("searchFlightsButton");
   const homeLink = document.getElementById("homeLink");
   const quizLink = document.getElementById("quizLink");
   const flightsLink = document.getElementById("flightsLink");
@@ -275,7 +241,6 @@ document.addEventListener("DOMContentLoaded", function () {
   flightButton.addEventListener("click", () => showPage("flights"));
   quizButton.addEventListener("click", () => showPage("quiz"));
   clearResultsButton.addEventListener("click", clearResults);
-  searchFlightsButton.addEventListener("click", showPage("flightResults"));
 
   homeLink.addEventListener("click", (e) => {
     e.preventDefault();
