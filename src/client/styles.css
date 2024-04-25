@@ -277,3 +277,20 @@ legend {
   margin-bottom: 10px;
   border-radius: 5px;
 }
+
+.book-flight-btn {
+  background-color: #f2ae49;
+  color: #fcfcfc;
+  font-weight: 600;
+  font-size: 24px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.book-flight-btn:hover {
+  background-color: #f2b949;
+}

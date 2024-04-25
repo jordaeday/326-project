@@ -29,6 +29,14 @@ export function showPage(pageId) {
     }
   }
 
+  if (pageId === "confirmation") {
+    const selectedFlight = JSON.parse(localStorage.getItem("selectedFlight"));
+    if (selectedFlight) {
+      const flightInfoElement = document.getElementById("destflight");
+      flightInfoElement.textContent = `Flight Number: ${selectedFlight.flightNumber}, Airline: ${selectedFlight.airline}, Departure: ${selectedFlight.departureTime}, Arrival: ${selectedFlight.arrivalTime}, Price: ${selectedFlight.price}`;
+    }
+  }
+
   /** Show the requested page */
   document.getElementById(pageId).style.display = "block";
   document.getElementById(pageId).classList.add("active");
@@ -193,6 +201,15 @@ function showFlightResults(fromCity, toCity, date) {
       <p><strong>Price:</strong> ${flight.price}</p>
     `;
     flightsList.appendChild(flightItem);
+
+    const bookButton = document.createElement("button");
+    bookButton.textContent = "Book This Flight ➡️";
+    bookButton.classList.add("book-flight-btn");
+    bookButton.addEventListener("click", () => {
+      localStorage.setItem("selectedFlight", JSON.stringify(flight));
+      showPage("confirmation");
+    });
+    flightItem.appendChild(bookButton);
   });
 
   showPage("flightResults");
@@ -280,19 +297,4 @@ document.addEventListener("DOMContentLoaded", function () {
     quizForm.reset();
     db.clearScores();
   });
-
-  /**Check for stored quiz responses and display results or show quiz*/
-  
-  /** const storedResponses = localStorage.getItem("quizResponses");
-  if (storedResponses) {
-    quizLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      showPage("results");
-    });
-  } else {
-    quizLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      showPage("quiz");
-    });
-  }
-}); */
+});
