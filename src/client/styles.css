@@ -219,4 +219,56 @@ button {
   background-color: #e9e9e9; 
 }
 
+/* Confirmation Section Styling */
+#confirmation {
+  background: #2a2828; 
+  border-radius: 8px;
+  padding: 2em;
+  max-width: 800px; 
+  margin: 2em auto; /* This is to center the confirmation section */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* adding just for a little depth */
+}
+
+#confirmation h1 {
+  font-size: 40px;
+  color: #0097b2;
+  width: fit-content;
+  padding: 0 20px 0 20px;
+}
+
+fieldset {
+  border: 1px solid #ddd; /* Subtle border for each fieldset */
+  border-radius: 4px;
+  padding: 1.5em;
+  margin-bottom: 1em;
+}
+
+legend {
+  width: auto; /* Only as wide as it needs to be */
+  padding: 0 10px;
+  font-size: 1.1em;
+  color: #fffdfd;
+  font-weight: bold;
+}
+
+#confirmation p {
+  background: #fff; 
+  padding: 10px 15px;
+  border: 1px solid #e7e7e7; 
+  border-radius: 4px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05); 
+  margin: 0; 
+}
+
+/* Specifically for location tags */
+#top-tags {
+  display: inline-block; /* Inline block for tag-like appearance */
+  background-color: #e6f7ff; 
+  color: #0056b3; 
+  border-radius: 16px; 
+  padding: 5px 10px;
+  font-size: 0.9em; 
+  margin-top: 8px; /* Adding some space above the tags */
+  font-weight: normal;
+}
 
