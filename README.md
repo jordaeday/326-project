@@ -17,7 +17,7 @@ Navigation bar with 4 page options:
 2. Quiz: 
 - Helps user find ideal destination based on personal preferences
 3. Flights: 
-- User choose dates for their destination and filtered flaights are presented
+- User chooses dates for their destination and filtered flaights are presented
 4. Confirm Booking: 
 - User is given list of their final destination and flight information
 
