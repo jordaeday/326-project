@@ -210,3 +210,8 @@ button {
   transition: background-color 0.3s; 
 }
 
+.location-tags .tag:hover {
+  background-color: #e9e9e9; 
+}
+
+
