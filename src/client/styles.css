@@ -195,10 +195,15 @@ button {
   background-color: #f2b949; /* Slightly lighter color on hover */
 }
 
+.location-tags {
+  margin-top: 12px; 
+  margin-bottom: 12px;
+}
+
 .location-tags .tag {
   display: inline-block;
   margin-right: 8px; 
-  margin-bottom: 8px; 
+  margin-bottom: 12px; 
   padding: 6px 12px; 
   border-radius: 12px; 
   background-color: #f2f2f2; 
