@@ -64,6 +64,22 @@ function displayResults() {
     resultsList.appendChild(listItem);
   });
 
+  if (rankedLocations.length > 0) {
+    const topLocation = rankedLocations[0];
+
+    // Update destination
+    const topDestinationElement = document.getElementById('top-destination');
+    topDestinationElement.textContent = topLocation.name;
+
+    // Update budget
+    const topBudgetElement = document.getElementById('top-budget');
+    topBudgetElement.textContent = `$${topLocation.about.budget}`;
+
+    // Update tags
+    const topTagsElement = document.getElementById('top-tags');
+    topTagsElement.textContent = topLocation.about.tags.join(', ');
+  }
+
   showPage("results");
 }
 
