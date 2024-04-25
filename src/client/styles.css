@@ -221,12 +221,12 @@ button {
 
 /* Confirmation Section Styling */
 #confirmation {
-  background: #2a2828;
+  background: #f9f9f9;
   border-radius: 8px;
   padding: 2em;
   max-width: 800px;
-  margin: 2em auto; /* This is to center the confirmation section */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* adding just for a little depth */
+  margin: 2em auto; /* Centering the confirmation section */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #confirmation h1 {
@@ -237,7 +237,7 @@ button {
 }
 
 fieldset {
-  border: 1px solid #ddd; /* Subtle border for each fieldset */
+  border: 1px solid #ddd;
   border-radius: 4px;
   padding: 1.5em;
   margin-bottom: 1em;
@@ -247,7 +247,7 @@ legend {
   width: auto; /* Only as wide as it needs to be */
   padding: 0 10px;
   font-size: 1.1em;
-  color: #F2AE49; 
+  color: #333;
   font-weight: bold;
 }
 
@@ -260,7 +260,6 @@ legend {
   margin: 0;
 }
 
-/* Specifically for location tags */
 #top-tags {
   display: inline-block; /* Inline block for tag-like appearance */
   background-color: #e6f7ff;
