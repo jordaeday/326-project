@@ -31,9 +31,19 @@ export function showPage(pageId) {
 
   if (pageId === "confirmation") {
     const selectedFlight = JSON.parse(localStorage.getItem("selectedFlight"));
+    const selectedLocation = JSON.parse(
+      localStorage.getItem("selectedLocation")
+    );
     if (selectedFlight) {
       const flightInfoElement = document.getElementById("destflight");
       flightInfoElement.textContent = `Flight Number: ${selectedFlight.flightNumber}, Airline: ${selectedFlight.airline}, Departure: ${selectedFlight.departureTime}, Arrival: ${selectedFlight.arrivalTime}, Price: ${selectedFlight.price}`;
+    }
+    if (selectedLocation) {
+      const destinationElem = document.getElementById("top-destination");
+      destinationElem.textContent = selectedLocation.name;
+
+      const locationInfo = document.getElementById("top-tags");
+      locationInfo.textContent = selectedLocation.about.tags.join(", ");
     }
   }
 
@@ -206,7 +216,9 @@ function showFlightResults(fromCity, toCity, date) {
     bookButton.textContent = "Book This Flight ➡️";
     bookButton.classList.add("book-flight-btn");
     bookButton.addEventListener("click", () => {
+      const locationDetails = db.locations.find((loc) => loc.name === toCity);
       localStorage.setItem("selectedFlight", JSON.stringify(flight));
+      localStorage.setItem("selectedLocation", JSON.stringify(locationDetails));
       showPage("confirmation");
     });
     flightItem.appendChild(bookButton);
