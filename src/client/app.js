@@ -1,18 +1,22 @@
 import * as db from "./db.js";
 
+/**
+ * Displays the specified page and hides others.
+ * @param {string} pageId - The ID of the page to display.
+ */
 export function showPage(pageId) {
-  console.log("Showing page:", pageId); // debug
+  console.log("Showing page:", pageId); /**debug */
 
-  // Hide all pages
+  /**Hide all pages */
   document.querySelectorAll(".page").forEach((page) => {
     page.style.display = "none";
     page.classList.remove("active");
   });
 
-  // Populates dropdown for flights to locations in database
+  /**Populates dropdown for flights to locations in database */
   if (pageId === "flights") {
     const toAirportSelect = document.getElementById("toAirport");
-    toAirportSelect.innerHTML = ""; // Clear existing options
+    toAirportSelect.innerHTML = ""; /** Clear existing options */
 
     const options = db.locations;
 
@@ -25,20 +29,27 @@ export function showPage(pageId) {
     }
   }
 
-  // Show the requested page
+  /** Show the requested page */
   document.getElementById(pageId).style.display = "block";
   document.getElementById(pageId).classList.add("active");
 }
 
-// Initial display setup
-showPage("home"); // Show home page by default
+/**Initial display setup */
+showPage("home"); /** Show home page by default */
 
-//Calculates total points from quiz responses
+/**
+ * Calculates the total points from quiz responses.
+ * @param {Object[]} responses - Array of quiz responses.
+ * @returns {number} Total points.
+ */
+
 function calculateTotalPoints(responses) {
   return responses.reduce((total, curr) => total + parseInt(curr.value), 0);
 }
 
-// Call after quiz submitted and scores calculated
+/**
+ * Displays the quiz results after they have been calculated.
+ */
 function displayResults() {
   const quizResponses = JSON.parse(localStorage.getItem("quizResponses"));
   const totalPoints = calculateTotalPoints(quizResponses);
@@ -50,20 +61,20 @@ function displayResults() {
     const listItem = document.createElement("div");
     const locScore = location.score;
 
-    // Start building the list item's HTML
+    /**Start building the list item's HTML */
     let listItemHTML = `
       <div class="rank">${index + 1}</div>
       <div class="score-circle">${locScore}</div>
       <div class="location-name" data-location="${location.name}">${location.name}</div>
     `;
 
-    // Adding a new div to contain the tags attribute for the locations
+    /**Adding a new div to contain the tags attribute for the locations */
     listItemHTML += '<div class="location-tags">';
     location.about.tags.forEach((tag) => {
       listItemHTML += `<span class="tag">${tag}</span>`;
     });
 
-    listItemHTML += "</div>"; // Closing the tags container div
+    listItemHTML += "</div>"; /**Closing the tags container div */
     listItem.innerHTML = listItemHTML;
     resultsList.appendChild(listItem);
   });
@@ -71,15 +82,15 @@ function displayResults() {
   if (rankedLocations.length > 0) {
     const topLocation = rankedLocations[0];
 
-    // Update destination
+    /**Update destination */
     const topDestinationElement = document.getElementById("top-destination");
     topDestinationElement.textContent = topLocation.name;
 
-    // Update budget
+    /** Update budget */
     const topBudgetElement = document.getElementById("top-budget");
     topBudgetElement.textContent = `$${topLocation.about.budget}`;
 
-    // Update tags
+    /**Update tags */
     const topTagsElement = document.getElementById("top-tags");
     topTagsElement.textContent = topLocation.about.tags.join(", ");
   }
@@ -87,29 +98,36 @@ function displayResults() {
   showPage("results");
 }
 
+/**
+ * Clears the quiz results and redirects to the quiz page.
+ */
 function clearResults() {
-  localStorage.removeItem("quizResponses"); // Remove the stored responses
+  localStorage.removeItem("quizResponses"); /**Remove the stored responses */
   const resultsList = document.getElementById("resultsList");
   if (resultsList) {
-    resultsList.innerHTML = ""; // Clear the results list in the DOM
+    resultsList.innerHTML = ""; /**Clear the results list in the DOM */
   }
   db.clearScores();
-  showPage("quiz"); // Redirect to the quiz page
+  showPage("quiz"); /**Redirect to the quiz page */
 }
 
+/**
+ * Handles the form submission for quiz responses.
+ * @param {Event} event - The submission event.
+ */
 async function submission(event) {
-  event.preventDefault(); // Prevent form submission
+  event.preventDefault(); /**Prevent form submission */
 
   const formData = new FormData(quizForm);
   db.clearScores();
 
-  // Convert FormData to an array of objects
+  /** Convert FormData to an array of objects */
   const quizResponses = Array.from(formData, ([name, value]) => ({
     name,
     value,
   }));
 
-  // Loop through each location
+  /**Loop through each location */
   try {
     await db.calculateAndStoreScores(quizResponses);
     displayResults();
@@ -118,24 +136,26 @@ async function submission(event) {
   }
 }
 
-// // Event listener for when results page is shown
-// document.getElementById("results").addEventListener("show", function () {
-//   const scores = db.topLocations(3);
-//   const sortedScores = scores.sort((a, b) => b.score - a.score);
+/** document.getElementById("results").addEventListener("show", function () {
+  const scores = db.topLocations(3);
+  const sortedScores = scores.sort((a, b) => b.score - a.score);
 
-//   const resultsList = document.getElementById("resultsList");
-//   resultsList.innerHTML = ""; // Clear the list
+  const resultsList = document.getElementById("resultsList");
+  resultsList.innerHTML = ""; // Clear the list
 
-//   sortedScores.forEach((location) => {
-//     const item = document.createElement("li");
-//     item.textContent = `${location.name}: ${location.score}`;
-//     resultsList.appendChild(item);
-//     //resultsList.appendChild(document.createElement("div").innerText="test");
-//   });
-// });
+  sortedScores.forEach((location) => {
+    const item = document.createElement("li");
+    item.textContent = `${location.name}: ${location.score}`;
+    resultsList.appendChild(item);
+    //resultsList.appendChild(document.createElement("div").innerText="test");
+  });
+}); */
 
 let slideIndex = 0;
 
+/**
+ * Cycles through image slides automatically.
+ */
 function showImageSlide() {
   let i;
   let slides = document.getElementsByClassName("imgSlides");
@@ -152,9 +172,10 @@ function showImageSlide() {
   }
   slides[slideIndex - 1].style.display = "block";
   dots[slideIndex - 1].className += " active";
-  setTimeout(showImageSlide, 3500); // Change image every 3.5 seconds
+  setTimeout(showImageSlide, 3500); /** Change image every 3.5 seconds */
 }
 
+/** Static flight data */
 const mockFlights = [
   {
     flightNumber: "FL123",
@@ -179,6 +200,12 @@ const mockFlights = [
   },
 ];
 
+/**
+ * Displays flight results based on the provided search parameters.
+ * @param {string} fromCity - Departure city.
+ * @param {string} toCity - Arrival city.
+ * @param {string} date - Flight date.
+ */
 function showFlightResults(fromCity, toCity, date) {
   document.getElementById("resultFrom").textContent = fromCity;
   document.getElementById("resultTo").textContent = toCity;
@@ -186,7 +213,7 @@ function showFlightResults(fromCity, toCity, date) {
   document.getElementById("resultDate").textContent = date;
 
   const flightsList = document.getElementById("flightsList");
-  flightsList.innerHTML = ""; // Clear previous results
+  flightsList.innerHTML = ""; /** Clear previous results */
 
   mockFlights.forEach((flight) => {
     const flightItem = document.createElement("div");
@@ -209,7 +236,7 @@ document
   .addEventListener("submit", function (event) {
     event.preventDefault();
 
-    // Get values from previous search
+    /** Get values from previous search */
     const fromAirportValue = document.getElementById("fromAirport").value;
     const toAirportSelect = document.getElementById("toAirport");
     const toAirportValue =
@@ -217,12 +244,12 @@ document
 
     const departureDateValue = document.getElementById("departureDate").value;
 
-    // Set values in flightResults
+    /** Set values in flightResults */
     document.getElementById("resultFrom").textContent = fromAirportValue;
     document.getElementById("resultTo").textContent = toAirportValue;
     document.getElementById("resultDate").textContent = departureDateValue;
 
-    // show the flightResults page
+    /** show the flightResults page */
     showFlightResults(fromAirportValue, toAirportValue, departureDateValue);
   });
 
@@ -244,7 +271,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const backToQuizButton = document.getElementById("backToQuizButton");
   const clearAnswersButton = document.getElementById("clearAnswersButton");
 
-  // Navigation event listeners
+  /** Navigation event listeners */
   flightButton.addEventListener("click", () => showPage("flights"));
   quizButton.addEventListener("click", () => showPage("quiz"));
   clearResultsButton.addEventListener("click", clearResults);
@@ -270,7 +297,7 @@ document.addEventListener("DOMContentLoaded", function () {
     showPage("quiz");
   });
 
-  // Quiz form event listener
+  /** Quiz form event listener */
   quizForm.addEventListener("submit", submission);
 
   previousResultsButton.addEventListener("click", (e) => {
@@ -289,17 +316,18 @@ document.addEventListener("DOMContentLoaded", function () {
     db.clearScores();
   });
 
-  // // Check for stored quiz responses and display results or show quiz
-  // const storedResponses = localStorage.getItem("quizResponses");
-  // if (storedResponses) {
-  //   quizLink.addEventListener("click", (e) => {
-  //     e.preventDefault();
-  //     showPage("results");
-  //   });
-  // } else {
-  //   quizLink.addEventListener("click", (e) => {
-  //     e.preventDefault();
-  //     showPage("quiz");
-  //   });
-  // }
-});
+  /**Check for stored quiz responses and display results or show quiz*/
+  
+  /** const storedResponses = localStorage.getItem("quizResponses");
+  if (storedResponses) {
+    quizLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      showPage("results");
+    });
+  } else {
+    quizLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      showPage("quiz");
+    });
+  }
+}); */
