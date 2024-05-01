@@ -50,11 +50,12 @@
     "prettier": "prettier src —write",
     "dev": "",
     "test": "",
-    "start": ""
+    "start": "node src/server/server.js"
   },
   "devDependencies": {
     "html-validate": "^8.18.0",
     "http-server": "^14.1.1",
-    "prettier": "^3.2.5"
+    "prettier": "^3.2.5",
+    "express": "^4.19.2"
   }
 }
