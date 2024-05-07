@@ -188,6 +188,26 @@ async function fetchFlightSchedules(depIata, arrIata, date) {
   }
 }
 
+function displayFlightResults(flights) {
+  const flightsList = document.getElementById("flightsList");
+  flightsList.innerHTML = '';  // Clear existing entries
+
+  flights.forEach((flight, index) => {  
+      const baseId = `flight${index+1}`;  // Create a base ID for each flight
+      const item = document.createElement("div");
+      item.className = "flight-card";
+      item.innerHTML = `
+        <div id="${baseId}_iata"><strong>IATA:</strong> ${flight.flight_iata}</div>
+        <div id="${baseId}_number"><strong>Number:</strong> ${flight.flight_number}</div>
+        <div id="${baseId}_departure"><strong>Departure Time:</strong> ${flight.dep_time}</div>
+        <div id="${baseId}_duration"><strong>Duration:</strong> ${flight.duration} minutes</div>
+        <div id="${baseId}_arrEst"><strong>Estimated Arrival:</strong> ${flight.arr_estimated}</div>
+      `;
+      flightsList.appendChild(item);
+  });
+
+  showPage("flightResults"); 
+}
 
 document.addEventListener("DOMContentLoaded", function () {
   showImageSlide();
