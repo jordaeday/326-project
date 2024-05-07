@@ -18,7 +18,7 @@ export function showPage(pageId) {
 
     db.locations.forEach(location => {
       const el = document.createElement("option");
-      el.textContent = `${location.name} (${location.airport})`; // Show name and airport code
+      el.textContent = `${location.airport}`; // Show name and airport code
       el.value = location.airport; // Use airport code as value
       toAirportSelect.appendChild(el);
     });
@@ -223,18 +223,17 @@ document.getElementById("flightForm").addEventListener("submit", handleFlightSea
 
 document.addEventListener("DOMContentLoaded", function () {
   showImageSlide();
-
+});
   const flightButton = document.getElementById("flightButton");
   const quizButton = document.getElementById("quizButton");
   const clearResultsButton = document.getElementById("clearResultsButton");
+  const searchFlightsButton = document.getElementById("searchFlightsButton");
   const homeLink = document.getElementById("homeLink");
   const quizLink = document.getElementById("quizLink");
   const flightsLink = document.getElementById("flightsLink");
   const confirmationLink = document.getElementById("confirmationLink");
   const quizForm = document.getElementById("quizForm");
-  const previousResultsButton = document.getElementById(
-    "previousResultsButton"
-  );
+  const previousResultsButton = document.getElementById("previousResultsButton");
   const backToQuizButton = document.getElementById("backToQuizButton");
   const clearAnswersButton = document.getElementById("clearAnswersButton");
 
@@ -242,6 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
   flightButton.addEventListener("click", () => showPage("flights"));
   quizButton.addEventListener("click", () => showPage("quiz"));
   clearResultsButton.addEventListener("click", clearResults);
+  //searchFlightsButton.addEventListener("click", showPage("flightResults"));
 
   homeLink.addEventListener("click", (e) => {
     e.preventDefault();
@@ -281,4 +281,19 @@ document.addEventListener("DOMContentLoaded", function () {
     quizForm.reset();
     db.clearScores();
   });
-});
+
+  /**Check for stored quiz responses and display results or show quiz*/
+  
+  /** const storedResponses = localStorage.getItem("quizResponses");
+  if (storedResponses) {
+    quizLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      showPage("results");
+    });
+  } else {
+    quizLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      showPage("quiz");
+    });
+  }
+}); */
