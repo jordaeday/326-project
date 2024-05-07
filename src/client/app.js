@@ -4,50 +4,33 @@ import * as db from "./db.js";
  * Displays the specified page and hides others.
  * @param {string} pageId - The ID of the page to display.
  */
+// Function to display the specified page and handle special logic for the flights page
 export function showPage(pageId) {
-  console.log("Showing page:", pageId); /**debug */
-
-  /**Hide all pages */
-  document.querySelectorAll(".page").forEach((page) => {
+  document.querySelectorAll(".page").forEach(page => {
     page.style.display = "none";
     page.classList.remove("active");
   });
 
-  /**Populates dropdown for flights to locations in database */
+  // Populate the 'to' dropdown for flights with airport codes
   if (pageId === "flights") {
     const toAirportSelect = document.getElementById("toAirport");
-    toAirportSelect.innerHTML = ""; /** Clear existing options */
+    toAirportSelect.innerHTML = ""; // Clear existing options
 
-    const options = db.locations;
-
-    for (let i = 0; i < options.length; i++) {
-      const opt = options[i];
+    db.locations.forEach(location => {
       const el = document.createElement("option");
-      el.textContent = opt.name;
-      el.value = opt;
+      el.textContent = `${location.name} (${location.airport})`; // Show name and airport code
+      el.value = location.airport; // Use airport code as value
       toAirportSelect.appendChild(el);
+    });
+
+    // Automatically select the top location's airport code if results are available
+    const results = JSON.parse(localStorage.getItem("quizResults"));
+    if (results && results.length > 0) {
+      toAirportSelect.value = results[0].airport; // results[0] should be the top location
     }
   }
 
-  if (pageId === "confirmation") {
-    const selectedFlight = JSON.parse(localStorage.getItem("selectedFlight"));
-    const selectedLocation = JSON.parse(
-      localStorage.getItem("selectedLocation")
-    );
-    if (selectedFlight) {
-      const flightInfoElement = document.getElementById("destflight");
-      flightInfoElement.textContent = `Flight Number: ${selectedFlight.flightNumber}, Airline: ${selectedFlight.airline}, Departure: ${selectedFlight.departureTime}, Arrival: ${selectedFlight.arrivalTime}, Price: ${selectedFlight.price}`;
-    }
-    if (selectedLocation) {
-      const destinationElem = document.getElementById("top-destination");
-      destinationElem.textContent = selectedLocation.name;
-
-      const locationInfo = document.getElementById("top-tags");
-      locationInfo.textContent = selectedLocation.about.tags.join(", ");
-    }
-  }
-
-  /** Show the requested page */
+  // Show the requested page
   document.getElementById(pageId).style.display = "block";
   document.getElementById(pageId).classList.add("active");
 }
