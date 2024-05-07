@@ -59,6 +59,9 @@ app.get('/api/advanced-flights-schedules', async (req, res) => {
 });
 
 
+// please run the server by the following commands:
+// cd src -> cd server -> node server.js
+// You will also see that there is a change in the port number. It was when I created the proxy server. Feel free to change that to 3000 if you want.
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
