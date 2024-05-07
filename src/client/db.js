@@ -72,6 +72,67 @@ export const locations = [
     },
     score: 0,
   },
+// The following are the additional locations I added 
+  {
+    name: "Sydney",
+    airport: "SYD", // Sydney Kingsford Smith Airport
+    about: {
+      budget: 210,
+      weather: [79, 79, 75, 68, 60, 55, 54, 59, 63, 68, 72, 79],
+      tags: ["beach", "city", "cultural"],
+      language: ["English"],
+      continent: ["Australia"],
+    },
+    score: 0,
+  },
+  {
+    name: "Cape Town",
+    airport: "CPT", // Cape Town International Airport
+    about: {
+      budget: 120,
+      weather: [72, 70, 68, 63, 59, 55, 54, 57, 60, 63, 68, 72],
+      tags: ["mountain", "beach", "cultural"],
+      language: ["English", "Afrikaans"],
+      continent: ["Africa"],
+    },
+    score: 0,
+  },
+  {
+    name: "Moscow",
+    airport: "SVO", // Sheremetyevo International Airport
+    about: {
+      budget: 150,
+      weather: [23, 25, 34, 46, 60, 68, 70, 68, 59, 46, 34, 25],
+      tags: ["city", "historical", "cold"],
+      language: ["Russian"],
+      continent: ["Europe"],
+    },
+    score: 0,
+  },
+  {
+    name: "Mumbai",
+    airport: "BOM", // Chhatrapati Shivaji Maharaj International Airport
+    about: {
+      budget: 95,
+      weather: [79, 79, 84, 88, 90, 86, 84, 82, 82, 86, 84, 79],
+      tags: ["city", "cultural", "busy"],
+      language: ["Hindi", "English"],
+      continent: ["Asia"],
+    },
+    score: 0,
+  },
+  {
+    name: "Mexico City",
+    airport: "MEX", // Mexico City International Airport
+    about: {
+      budget: 100,
+      weather: [59, 63, 68, 72, 75, 75, 72, 72, 68, 63, 59, 55],
+      tags: ["cultural", "historic", "city"],
+      language: ["Spanish"],
+      continent: ["North America"],
+    },
+    score: 0,
+  }
 ];
 
 //export const mockFlights = [
