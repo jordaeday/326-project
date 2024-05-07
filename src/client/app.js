@@ -1,7 +1,5 @@
 import * as db from "./db.js";
 
-const API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiZjc4OGU0MWMwNDYyYzExMjg4NzRiYzQ3NWQ4ODU0OWVlYjY2NGY2YTgxMWVmMDVkNTczYjM4N2U3MWFmYmMxMjQ0ZDZlNWM1YTdlOWJmOWYiLCJpYXQiOjE3MTQ5NzkxMjAsIm5iZiI6MTcxNDk3OTEyMCwiZXhwIjoxNzQ2NTE1MTIwLCJzdWIiOiIyMjUwNCIsInNjb3BlcyI6W119.KrMg7pjGNipTe9i3EIiIejXuaIZe9cBLBgDrVITYtT8VfeSHS0sqgiWlEdTl-dFh0K-b4noAFSdwOcgX__mcgA';
-
 /**
  * Displays the specified page and hides others.
  * @param {string} pageId - The ID of the page to display.
@@ -163,76 +161,33 @@ function showImageSlide() {
   setTimeout(showImageSlide, 3500); /** Change image every 3.5 seconds */
 }
 
-/**
- * Displays flight results based on the provided search parameters.
- * @param {string} fromCity - Departure city.
- * @param {string} toCity - Arrival city.
- * @param {string} date - Flight date.
- */
-function showFlightResults(fromCity, toCity, date) {
-  if (document.getElementById("resultFrom").textContent === "") {
-    alert("Please enter departing location.");
+const API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiZjc4OGU0MWMwNDYyYzExMjg4NzRiYzQ3NWQ4ODU0OWVlYjY2NGY2YTgxMWVmMDVkNTczYjM4N2U3MWFmYmMxMjQ0ZDZlNWM1YTdlOWJmOWYiLCJpYXQiOjE3MTQ5NzkxMjAsIm5iZiI6MTcxNDk3OTEyMCwiZXhwIjoxNzQ2NTE1MTIwLCJzdWIiOiIyMjUwNCIsInNjb3BlcyI6W119.KrMg7pjGNipTe9i3EIiIejXuaIZe9cBLBgDrVITYtT8VfeSHS0sqgiWlEdTl-dFh0K-b4noAFSdwOcgX__mcgA';
+
+async function fetchFlightSchedules(depIata, arrIata, date) {
+  const url = `/api/advanced-flights-schedules?iataCode=${depIata}&type=departure`;
+
+  try {
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log(data);
+      if (!data.success) throw new Error('Failed to fetch flights');
+      /* filtered the fetched data to match the departure airport and arrival airport*/
+      /* the date filter works but sometimes gives no data because I guess there are no flights on that day from and to the inputted airports*/
+      /* also I limited the fetch to only 5 flights, feel free to change the number. No change needed elsewhere because the new elements are created dynamically */
+      const filteredFlights = data.data.filter(flight => 
+        flight.dep_iata === depIata && 
+        flight.arr_iata === arrIata //&& 
+        //flight.dep_time.includes(date)
+    ).slice(0, 5);
+
+    console.log("Filtered Flights:", filteredFlights);  // Debugging line to log filtered flights
+    return filteredFlights;
+  } catch (error) {
+      console.error('Error fetching flight data:', error);
+      return [];
   }
-  if (document.getElementById("resultDate").textContent === "") {
-    alert("Please enter departure date.");
-  }
-
-  document.getElementById("resultFrom").textContent = fromCity;
-  document.getElementById("resultTo").textContent = toCity;
-  console.log(toCity);
-  document.getElementById("resultDate").textContent = date;
-
-  const flightsList = document.getElementById("flightsList");
-  flightsList.innerHTML = ""; /** Clear previous results */
-
-  db.mockFlights.forEach((flight) => {
-    const flightItem = document.createElement("div");
-    flightItem.classList.add("flight-item");
-    flightItem.innerHTML = `
-      <p><strong>Flight:</strong> ${flight.flightNumber}</p>
-      <p><strong>Airline:</strong> ${flight.airline}</p>
-      <p><strong>Departure:</strong> ${flight.departureTime}</p>
-      <p><strong>Arrival:</strong> ${flight.arrivalTime}</p>
-      <p><strong>Price:</strong> ${flight.price}</p>
-    `;
-    flightsList.appendChild(flightItem);
-
-    const bookButton = document.createElement("button");
-    bookButton.textContent = "Book This Flight ➡️";
-    bookButton.classList.add("book-flight-btn");
-    bookButton.addEventListener("click", () => {
-      const locationDetails = db.locations.find((loc) => loc.name === toCity);
-      localStorage.setItem("selectedFlight", JSON.stringify(flight));
-      localStorage.setItem("selectedLocation", JSON.stringify(locationDetails));
-      showPage("confirmation");
-    });
-    flightItem.appendChild(bookButton);
-  });
-
-  showPage("flightResults");
 }
 
-document
-  .getElementById("flightForm")
-  .addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    /** Get values from previous search */
-    const fromAirportValue = document.getElementById("fromAirport").value;
-    const toAirportSelect = document.getElementById("toAirport");
-    const toAirportValue =
-      toAirportSelect.options[toAirportSelect.selectedIndex].text;
-
-    const departureDateValue = document.getElementById("departureDate").value;
-
-    /** Set values in flightResults */
-    document.getElementById("resultFrom").textContent = fromAirportValue;
-    document.getElementById("resultTo").textContent = toAirportValue;
-    document.getElementById("resultDate").textContent = departureDateValue;
-
-    /** show the flightResults page */
-    showFlightResults(fromAirportValue, toAirportValue, departureDateValue);
-  });
 
 document.addEventListener("DOMContentLoaded", function () {
   showImageSlide();
