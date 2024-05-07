@@ -271,6 +271,7 @@ legend {
   font-weight: normal;
 }
 
+
 .flight-item {
   border: 1px solid #ccc;
   padding: 10px;
@@ -278,19 +279,31 @@ legend {
   border-radius: 5px;
 }
 
-.book-flight-btn {
-  background-color: #f2ae49;
-  color: #fcfcfc;
-  font-weight: 600;
-  font-size: 24px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  margin: 20px;
-  transition: background-color 0.3s ease;
+/* Styles for the Available Flights section */
+.flight-card {
+  background-color: #f9f9f9;   /* Light grey background */
+  border: 1px solid #ccc;      /* Grey border */
+  border-radius: 5px;          /* Rounded corners for the card */
+  padding: 20px;               /* Padding inside the card */
+  margin-bottom: 20px;         /* Space between each card */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+  transition: transform 0.3s ease-in-out; /* Smooth transform on hover */
 }
 
-.book-flight-btn:hover {
-  background-color: #f2b949;
+.flight-card:hover {
+  transform: translateY(-5px); /* Slight lift effect on hover */
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2); /* Enhanced shadow on hover */
+}
+
+/* Basic styling for text inside the card to enhance readability */
+.flight-card div {
+  font-size: 16px;             /* Adequate font size for readability */
+  color: #333;                 /* Dark grey color for text */
+  margin-bottom: 10px;         /* Spacing between each line of text */
+}
+
+/* Style for the headers in each flight card for emphasis */
+.flight-card strong {
+  color: #007BFF;              /* Blue color for headers */
+  margin-right: 5px;           /* Space after header before text */
 }
