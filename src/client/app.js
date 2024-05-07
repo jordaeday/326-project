@@ -163,52 +163,64 @@ function showImageSlide() {
 
 const API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiZjc4OGU0MWMwNDYyYzExMjg4NzRiYzQ3NWQ4ODU0OWVlYjY2NGY2YTgxMWVmMDVkNTczYjM4N2U3MWFmYmMxMjQ0ZDZlNWM1YTdlOWJmOWYiLCJpYXQiOjE3MTQ5NzkxMjAsIm5iZiI6MTcxNDk3OTEyMCwiZXhwIjoxNzQ2NTE1MTIwLCJzdWIiOiIyMjUwNCIsInNjb3BlcyI6W119.KrMg7pjGNipTe9i3EIiIejXuaIZe9cBLBgDrVITYtT8VfeSHS0sqgiWlEdTl-dFh0K-b4noAFSdwOcgX__mcgA';
 
+/**
+ * Fetches flight schedules based on departure airport IATA code, arrival airport IATA code, and a specified date.
+ * @param {string} depIata - IATA code for the departure airport.
+ * @param {string} arrIata - IATA code for the arrival airport.
+ * @param {string} date - The date of the flight (unused currently but can be implemented for date filtering).
+ * @returns {Promise<Array>} A promise that resolves to an array of flight objects, filtered and limited to 5 entries.
+ */
 async function fetchFlightSchedules(depIata, arrIata, date) {
   const url = `/api/advanced-flights-schedules?iataCode=${depIata}&type=departure`;
 
   try {
-      const response = await fetch(url);
-      const data = await response.json();
-      console.log(data);
-      if (!data.success) throw new Error('Failed to fetch flights');
-      /* filtered the fetched data to match the departure airport and arrival airport*/
-      /* the date filter works but sometimes gives no data because I guess there are no flights on that day from and to the inputted airports*/
-      /* also I limited the fetch to only 5 flights, feel free to change the number. No change needed elsewhere because the new elements are created dynamically */
-      const filteredFlights = data.data.filter(flight => 
-        flight.dep_iata === depIata && 
-        flight.arr_iata === arrIata //&& 
-        //flight.dep_time.includes(date)
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+    if (!data.success) throw new Error('Failed to fetch flights');
+    
+    const filteredFlights = data.data.filter(flight => 
+      flight.dep_iata === depIata && 
+      flight.arr_iata === arrIata
     ).slice(0, 5);
 
-    console.log("Filtered Flights:", filteredFlights);  // Debugging line to log filtered flights
+    console.log("Filtered Flights:", filteredFlights);
     return filteredFlights;
   } catch (error) {
-      console.error('Error fetching flight data:', error);
-      return [];
+    console.error('Error fetching flight data:', error);
+    return [];
   }
 }
 
+/**
+ * Displays flight results in a formatted list.
+ * @param {Array} flights - An array of flight objects to display.
+ */
 function displayFlightResults(flights) {
   const flightsList = document.getElementById("flightsList");
-  flightsList.innerHTML = '';  // Clear existing entries
+  flightsList.innerHTML = '';
 
-  flights.forEach((flight, index) => {  
-      const baseId = `flight${index+1}`;  // Create a base ID for each flight
-      const item = document.createElement("div");
-      item.className = "flight-card";
-      item.innerHTML = `
-        <div id="${baseId}_iata"><strong>IATA:</strong> ${flight.flight_iata}</div>
-        <div id="${baseId}_number"><strong>Number:</strong> ${flight.flight_number}</div>
-        <div id="${baseId}_departure"><strong>Departure Time:</strong> ${flight.dep_time}</div>
-        <div id="${baseId}_duration"><strong>Duration:</strong> ${flight.duration} minutes</div>
-        <div id="${baseId}_arrEst"><strong>Estimated Arrival:</strong> ${flight.arr_estimated}</div>
-      `;
-      flightsList.appendChild(item);
+  flights.forEach((flight, index) => {
+    const baseId = `flight${index+1}`;
+    const item = document.createElement("div");
+    item.className = "flight-card";
+    item.innerHTML = `
+      <div id="${baseId}_iata"><strong>IATA:</strong> ${flight.flight_iata}</div>
+      <div id="${baseId}_number"><strong>Number:</strong> ${flight.flight_number}</div>
+      <div id="${baseId}_departure"><strong>Departure Time:</strong> ${flight.dep_time}</div>
+      <div id="${baseId}_duration"><strong>Duration:</strong> ${flight.duration} minutes</div>
+      <div id="${baseId}_arrEst"><strong>Estimated Arrival:</strong> ${flight.arr_estimated}</div>
+    `;
+    flightsList.appendChild(item);
   });
 
-  showPage("flightResults"); 
+  showPage("flightResults");
 }
 
+/**
+ * Handles the flight search form submission.
+ * @param {Event} event - The form submission event.
+ */
 async function handleFlightSearch(event) {
   event.preventDefault();
   const fromIata = document.getElementById("fromAirport").value;
