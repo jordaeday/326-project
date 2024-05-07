@@ -209,6 +209,18 @@ function displayFlightResults(flights) {
   showPage("flightResults"); 
 }
 
+async function handleFlightSearch(event) {
+  event.preventDefault();
+  const fromIata = document.getElementById("fromAirport").value;
+  const toIata = document.getElementById("toAirport").value;
+  const date = document.getElementById("departureDate").value;
+
+  const flightResults = await fetchFlightSchedules(fromIata, toIata, date);
+  displayFlightResults(flightResults);
+}
+
+document.getElementById("flightForm").addEventListener("submit", handleFlightSearch);
+
 document.addEventListener("DOMContentLoaded", function () {
   showImageSlide();
 
