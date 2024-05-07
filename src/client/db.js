@@ -14,11 +14,10 @@ export const db = new pouchdb("scores");
 export const locations = [
   {
     name: "Tokyo",
+    airport: "NRT", // Narita International Airport
     about: {
       budget: 157,
-      weather: [
-        40, 45, 50, 55, 65, 74, 80, 81, 75, 64, 55, 47,
-      ] /**sample data for now */,
+      weather: [40, 45, 50, 55, 65, 74, 80, 81, 75, 64, 55, 47],
       tags: ["city", "unique", "electronics"],
       language: ["Japanese"],
       continent: ["Asia"],
@@ -27,11 +26,10 @@ export const locations = [
   },
   {
     name: "Paris",
+    airport: "CDG", // Charles de Gaulle Airport
     about: {
       budget: 252,
-      weather: [
-        40, 43, 48, 55, 65, 74, 72, 72, 63, 55, 48, 43,
-      ] /**sample data for now */,
+      weather: [40, 43, 48, 55, 65, 74, 72, 72, 63, 55, 48, 43],
       tags: ["romantic", "cultural", "art", "city"],
       language: ["French"],
       continent: ["Europe"],
@@ -40,24 +38,22 @@ export const locations = [
   },
   {
     name: "Bora Bora",
+    airport: "BOB", // Bora Bora Airport
     about: {
       budget: 163,
-      weather: [
-        77, 77, 77, 77, 77, 75, 75, 75, 75, 75, 76, 76,
-      ] /**sample data for now */,
+      weather: [77, 77, 77, 77, 77, 75, 75, 75, 75, 75, 76, 76],
       tags: ["beach", "relaxation", "tropical"],
       language: ["English", "French"],
-      continent: ["None"],
+      continent: ["None"], // Geographically part of Oceania, not associated with a continent
     },
     score: 0,
   },
   {
     name: "Rome",
+    airport: "FCO", // Leonardo da Vinci–Fiumicino Airport
     about: {
       budget: 184,
-      weather: [
-        45, 46, 50, 55, 65, 73, 79, 79, 74, 60, 55, 47,
-      ] /**sample data for now */,
+      weather: [45, 46, 50, 55, 65, 73, 79, 79, 74, 60, 55, 47],
       tags: ["cultural", "art", "city"],
       language: ["Italian"],
       continent: ["Europe"],
@@ -66,11 +62,10 @@ export const locations = [
   },
   {
     name: "Los Angeles",
+    airport: "LAX", // Los Angeles International Airport
     about: {
       budget: 258,
-      weather: [
-        58, 59, 61, 63, 67, 70, 74, 76, 74, 70, 63, 59,
-      ] /**sample data for now */,
+      weather: [58, 59, 61, 63, 67, 70, 74, 76, 74, 70, 63, 59],
       tags: ["tropical", "city", "cultural"],
       language: ["English"],
       continent: ["North America"],
