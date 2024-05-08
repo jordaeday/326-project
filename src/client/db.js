@@ -20,7 +20,8 @@ export const locations = [
       weather: [40, 45, 50, 55, 65, 74, 80, 81, 75, 64, 55, 47],
       tags: ["city", "unique", "electronics"],
       language: ["Japanese"],
-      continent: ["Asia"],
+      continent: ["Asia"],    
+      info: "Tokyo is a dynamic mix of tradition and modernity. Explore neon-lit streets, serene temples, and bustling markets. Indulge in sushi, discover vibrant neighborhoods, and soak in stunning city views. Tokyo offers an unforgettable adventure for every traveler!",
     },
     score: 0,
   },
@@ -33,6 +34,7 @@ export const locations = [
       tags: ["romantic", "cultural", "art", "city"],
       language: ["French"],
       continent: ["Europe"],
+      info: "Paris: The City of Light, where romance meets culture. Here, you can wander along the Seine and marvel at iconic landmarks like the Eiffel Tower and Notre-Dame Cathedral. Don't forget to delight in world-class art at the Louvre, savor French cuisine in charming bistros, and stroll through picturesque neighborhoods like Montmartre.",
     },
     score: 0,
   },
@@ -45,6 +47,7 @@ export const locations = [
       tags: ["beach", "relaxation", "tropical"],
       language: ["English", "French"],
       continent: ["None"], // Geographically part of Oceania, not associated with a continent
+      info: "A tropical paradise of crystal-clear waters and pristine beaches. Dive into the vibrant coral reefs, relax on powdery white sands, and watch the sunset over Mount Otemanu. Indulge in luxury resorts and even snorkel with colorful marine life! Bora Bora offers a blissful escape into paradise.",
     },
     score: 0,
   },
@@ -57,6 +60,7 @@ export const locations = [
       tags: ["cultural", "art", "city"],
       language: ["Italian"],
       continent: ["Europe"],
+      info: "Rome is a blend of ancient wonders and vibrant modern life. Explore iconic landmarks like the Colosseum, Vatican City, and the Pantheon, each steeped in history and architectural marvels. Wander through charming cobblestone streets, savor authentic Italian cuisine in trattorias, and toss a coin into the Trevi Fountain for luck.",
     },
     score: 0,
   },
@@ -69,6 +73,7 @@ export const locations = [
       tags: ["tropical", "city", "cultural"],
       language: ["English"],
       continent: ["North America"],
+      info: "Los Angeles is a melting pot of creativity in the California sun. Discover the glitz and glamour of Hollywood, stroll along the famous Walk of Fame, and catch a glimpse of your favorite stars. Immerse yourself in the diverse cultures of neighborhoods like Chinatown, Little Tokyo, and Koreatown. Indulge in world-class shopping on Rodeo Drive, soak up the sun on Venice Beach, or hike to the iconic Hollywood Sign for breathtaking views of the city.",
     },
     score: 0,
   },
@@ -81,7 +86,8 @@ export const locations = [
       weather: [79, 79, 75, 68, 60, 55, 54, 59, 63, 68, 72, 79],
       tags: ["beach", "city", "cultural"],
       language: ["English"],
-      continent: ["Australia"],
+      continent: ["Australia"],    
+      info: "Sydney is a vibrant city with iconic landmarks, stunning harbor, and diverse dining. Explore the Opera House, relax on Bondi Beach, and enjoy coastal walks. Rich in culture and natural beauty.",
     },
     score: 0,
   },
@@ -94,6 +100,7 @@ export const locations = [
       tags: ["mountain", "beach", "cultural"],
       language: ["English", "Afrikaans"],
       continent: ["Africa"],
+      info: "Enter South Africa and come to this picturesque city nestled between mountains and ocean. Visit Table Mountain, enjoy wine tasting in the nearby vineyards, and explore historic neighborhoods like Bo-Kaap. Experience diverse cuisine and vibrant culture.",
     },
     score: 0,
   },
@@ -106,6 +113,7 @@ export const locations = [
       tags: ["city", "historical", "cold"],
       language: ["Russian"],
       continent: ["Europe"],
+      info: "Moscow is the capital of Russia, rich in history and culture. Here, explore iconic landmarks like the Kremlin and Red Square, visit world-class museums such as the Tretyakov Gallery, and enjoy the lively atmosphere of its bustling streets.",
     },
     score: 0,
   },
@@ -118,6 +126,7 @@ export const locations = [
       tags: ["city", "cultural", "busy"],
       language: ["Hindi", "English"],
       continent: ["Asia"],
+      info: "In Mumbai, you can indulge in diverse culinary delights and explore historic sites like the Gateway of India and Elephanta Caves. Don't miss the vibrant markets and scenic Marine Drive in this dynamic city on India's west coast.",
     },
     score: 0,
   },
@@ -130,6 +139,7 @@ export const locations = [
       tags: ["cultural", "historic", "city"],
       language: ["Spanish"],
       continent: ["North America"],
+      info: "Mexico City: Bustling capital with rich cultural heritage. Explore historic landmarks like the Zocalo and Chapultepec Castle, savor authentic Mexican cuisine, and immerse yourself in vibrant street life. Discover world-class museums, lively markets, and colorful street art.",
     },
     score: 0,
   }
@@ -274,10 +284,10 @@ async function storeLocationScore(location) {
  */
 export async function calculateAndStoreScores(quizResponses) {
   /**loop through each location and calculate score */
-  locations.forEach((location) => {
+  for (const location of locations) {
     calculateScore(location, quizResponses);
-  });
-
+  }
+  
   /**store in local storage */
   localStorage.setItem("quizResponses", JSON.stringify(quizResponses));
 
