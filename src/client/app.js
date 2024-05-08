@@ -94,6 +94,10 @@ function displayResults() {
     /**Update tags */
     const topTagsElement = document.getElementById("top-tags");
     topTagsElement.textContent = topLocation.about.tags.join(", ");
+
+    /**Update tags */
+    const topInfoElement = document.getElementById("top-info");
+    topInfoElement.textContent = topLocation.about.info;
   }
 
   showPage("results");
