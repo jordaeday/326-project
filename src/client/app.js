@@ -16,17 +16,26 @@ export function showPage(pageId) {
     const toAirportSelect = document.getElementById("toAirport");
     toAirportSelect.innerHTML = ""; // Clear existing options
 
+    const fromAirportSelect = document.getElementById("fromAirport");
+    fromAirportSelect.innerHTML = ""; // Clear existing options
+
     db.locations.forEach(location => {
-      const el = document.createElement("option");
-      el.textContent = `${location.airport}`; // Show name and airport code
-      el.value = location.airport; // Use airport code as value
-      toAirportSelect.appendChild(el);
+      const toEl = document.createElement("option"); // Create option element for toAirport dropdown
+      toEl.textContent = `${location.airport}`;
+      toEl.value = location.airport;
+      toAirportSelect.appendChild(toEl); // Append to toAirport dropdown
+
+      const fromEl = document.createElement("option"); // Create option element for fromAirport dropdown
+      fromEl.textContent = `${location.airport}`;
+      fromEl.value = location.airport;
+      fromAirportSelect.appendChild(fromEl); // Append to fromAirport dropdown
     });
 
     // Automatically select the top location's airport code if results are available
-    const results = JSON.parse(localStorage.getItem("quizResults"));
+    const results = JSON.parse(localStorage.getItem("quizResponses"));
     if (results && results.length > 0) {
       toAirportSelect.value = results[0].airport; // results[0] should be the top location
+      fromAirportSelect.value = results[0].airport;
     }
   }
 
