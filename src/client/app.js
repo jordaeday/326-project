@@ -262,6 +262,8 @@ function updateConfirmationPage(flight) {
     document.getElementById("top-tags").textContent =
       location.about.tags.join(", ");
     document.getElementById("top-info").textContent = location.about.info;
+    document.getElementById("destflight").textContent =
+      `Flight Number ${flight.flight_number}`;
   } else {
     document.getElementById("top-destination").textContent =
       "Destination not found.";
