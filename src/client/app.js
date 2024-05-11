@@ -263,7 +263,7 @@ function updateConfirmationPage(flight) {
       location.about.tags.join(", ");
     document.getElementById("top-info").textContent = location.about.info;
     document.getElementById("destflight").textContent =
-      `Flight Number ${flight.flight_number}`;
+      `Flight Number ${flight.flight_aita}`;
   } else {
     document.getElementById("top-destination").textContent =
       "Destination not found.";
