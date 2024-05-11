@@ -6,7 +6,7 @@ import * as db from "./db.js";
  */
 // Function to display the specified page and handle special logic for the flights page
 export function showPage(pageId) {
-  document.querySelectorAll(".page").forEach(page => {
+  document.querySelectorAll(".page").forEach((page) => {
     page.style.display = "none";
     page.classList.remove("active");
   });
@@ -22,7 +22,7 @@ export function showPage(pageId) {
     const fromAirportSelect = document.getElementById("fromAirport");
     fromAirportSelect.innerHTML = ""; // Clear existing options
 
-    db.locations.forEach(location => {
+    db.locations.forEach((location) => {
       const toEl = document.createElement("option"); // Create option element for toAirport dropdown
       toEl.textContent = `${location.airport}`;
       toEl.value = location.airport;
@@ -177,7 +177,8 @@ function showImageSlide() {
   setTimeout(showImageSlide, 3500); /** Change image every 3.5 seconds */
 }
 
-const API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiZjc4OGU0MWMwNDYyYzExMjg4NzRiYzQ3NWQ4ODU0OWVlYjY2NGY2YTgxMWVmMDVkNTczYjM4N2U3MWFmYmMxMjQ0ZDZlNWM1YTdlOWJmOWYiLCJpYXQiOjE3MTQ5NzkxMjAsIm5iZiI6MTcxNDk3OTEyMCwiZXhwIjoxNzQ2NTE1MTIwLCJzdWIiOiIyMjUwNCIsInNjb3BlcyI6W119.KrMg7pjGNipTe9i3EIiIejXuaIZe9cBLBgDrVITYtT8VfeSHS0sqgiWlEdTl-dFh0K-b4noAFSdwOcgX__mcgA';
+const API_KEY =
+  "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiZjc4OGU0MWMwNDYyYzExMjg4NzRiYzQ3NWQ4ODU0OWVlYjY2NGY2YTgxMWVmMDVkNTczYjM4N2U3MWFmYmMxMjQ0ZDZlNWM1YTdlOWJmOWYiLCJpYXQiOjE3MTQ5NzkxMjAsIm5iZiI6MTcxNDk3OTEyMCwiZXhwIjoxNzQ2NTE1MTIwLCJzdWIiOiIyMjUwNCIsInNjb3BlcyI6W119.KrMg7pjGNipTe9i3EIiIejXuaIZe9cBLBgDrVITYtT8VfeSHS0sqgiWlEdTl-dFh0K-b4noAFSdwOcgX__mcgA";
 
 /**
  * Fetches flight schedules based on departure airport IATA code, arrival airport IATA code, and a specified date.
@@ -194,21 +195,22 @@ async function fetchFlightSchedules(depIata, arrIata, date) {
     const response = await fetch(url);
     const data = await response.json();
     console.log(data);
-    if (!data.success) throw new Error('Failed to fetch flights');
-    
-    const filteredFlights = data.data.filter(flight => 
-      flight.dep_iata === depIata && 
-      flight.arr_iata === arrIata
-    ).slice(0, 5);
+    if (!data.success) throw new Error("Failed to fetch flights");
 
-    if(filteredFlights.length === 0) {
+    const filteredFlights = data.data
+      .filter(
+        (flight) => flight.dep_iata === depIata && flight.arr_iata === arrIata
+      )
+      .slice(0, 5);
+
+    if (filteredFlights.length === 0) {
       flightError.innerHTML = "No flights found for the selected route.";
     }
 
     console.log("Filtered Flights:", filteredFlights);
     return filteredFlights;
   } catch (error) {
-    console.error('Error fetching flight data:', error);
+    console.error("Error fetching flight data:", error);
     return [];
   }
 }
@@ -219,10 +221,10 @@ async function fetchFlightSchedules(depIata, arrIata, date) {
  */
 function displayFlightResults(flights) {
   const flightsList = document.getElementById("flightsList");
-  flightsList.innerHTML = '';
+  flightsList.innerHTML = "";
 
   flights.forEach((flight, index) => {
-    const baseId = `flight${index+1}`;
+    const baseId = `flight${index + 1}`;
     const item = document.createElement("div");
     item.className = "flight-card";
     item.innerHTML = `
@@ -231,11 +233,36 @@ function displayFlightResults(flights) {
       <div id="${baseId}_departure"><strong>Departure Time:</strong> ${flight.dep_time}</div>
       <div id="${baseId}_duration"><strong>Duration:</strong> ${flight.duration} minutes</div>
       <div id="${baseId}_arrEst"><strong>Estimated Arrival:</strong> ${flight.arr_estimated}</div>
+      <button type="button" id="confirmBtn${index}">Confirm Booking</button>
     `;
     flightsList.appendChild(item);
-  });
 
+    document
+      .getElementById(`confirmBtn${index}`)
+      .addEventListener("click", () => {
+        confirmBooking(flight);
+      });
+  });
   showPage("flightResults");
+}
+
+function confirmBooking(flight) {
+  localStorage.setItem("selectedFlight", JSON.stringify(flight)); // Store the flight in localStorage
+  showPage("confirmation"); // Display the confirmation page
+  updateConfirmationPage(); // Update the confirmation page details
+}
+
+function updateConfirmationPage() {
+  const selectedFlight = JSON.parse(localStorage.getItem("selectedFlight"));
+  if (selectedFlight) {
+    // Update existing elements to display the flight information
+    document.getElementById("top-destination").textContent =
+      selectedFlight.arr_iata; // Assuming destination is the arrival airport
+    document.getElementById("top-budget").textContent =
+      `Flight Number: ${selectedFlight.flight_number}`;
+    document.getElementById("top-info").textContent =
+      `Departure: ${selectedFlight.dep_time} - Arrival: ${selectedFlight.arr_estimated}`;
+  }
 }
 
 /**
@@ -256,64 +283,66 @@ async function handleFlightSearch(event) {
   displayFlightResults(flightResults);
 }
 
-document.getElementById("flightForm").addEventListener("submit", handleFlightSearch);
+document
+  .getElementById("flightForm")
+  .addEventListener("submit", handleFlightSearch);
 
 document.addEventListener("DOMContentLoaded", function () {
   showImageSlide();
 });
-  const flightButton = document.getElementById("flightButton");
-  const quizButton = document.getElementById("quizButton");
-  const clearResultsButton = document.getElementById("clearResultsButton");
-  const searchFlightsButton = document.getElementById("searchFlightsButton");
-  const homeLink = document.getElementById("homeLink");
-  const quizLink = document.getElementById("quizLink");
-  const flightsLink = document.getElementById("flightsLink");
-  const confirmationLink = document.getElementById("confirmationLink");
-  const quizForm = document.getElementById("quizForm");
-  const previousResultsButton = document.getElementById("previousResultsButton");
-  const backToQuizButton = document.getElementById("backToQuizButton");
-  const clearAnswersButton = document.getElementById("clearAnswersButton");
+const flightButton = document.getElementById("flightButton");
+const quizButton = document.getElementById("quizButton");
+const clearResultsButton = document.getElementById("clearResultsButton");
+const searchFlightsButton = document.getElementById("searchFlightsButton");
+const homeLink = document.getElementById("homeLink");
+const quizLink = document.getElementById("quizLink");
+const flightsLink = document.getElementById("flightsLink");
+const confirmationLink = document.getElementById("confirmationLink");
+const quizForm = document.getElementById("quizForm");
+const previousResultsButton = document.getElementById("previousResultsButton");
+const backToQuizButton = document.getElementById("backToQuizButton");
+const clearAnswersButton = document.getElementById("clearAnswersButton");
 
-  /** Navigation event listeners */
-  flightButton.addEventListener("click", () => showPage("flights"));
-  quizButton.addEventListener("click", () => showPage("quiz"));
-  clearResultsButton.addEventListener("click", clearResults);
+/** Navigation event listeners */
+flightButton.addEventListener("click", () => showPage("flights"));
+quizButton.addEventListener("click", () => showPage("quiz"));
+clearResultsButton.addEventListener("click", clearResults);
 
-  homeLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    showPage("home");
-  });
+homeLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  showPage("home");
+});
 
-  flightsLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    showPage("flights");
-  });
+flightsLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  showPage("flights");
+});
 
-  confirmationLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    showPage("confirmation");
-  });
+confirmationLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  showPage("confirmation");
+});
 
-  quizLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    showPage("quiz");
-  });
+quizLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  showPage("quiz");
+});
 
-  /** Quiz form event listener */
-  quizForm.addEventListener("submit", submission);
+/** Quiz form event listener */
+quizForm.addEventListener("submit", submission);
 
-  previousResultsButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    showPage("results");
-  });
+previousResultsButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  showPage("results");
+});
 
-  backToQuizButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    showPage("quiz");
-  });
+backToQuizButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  showPage("quiz");
+});
 
-  clearAnswersButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    quizForm.reset();
-    db.clearScores();
-  });
+clearAnswersButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  quizForm.reset();
+  db.clearScores();
+});
