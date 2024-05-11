@@ -247,21 +247,24 @@ function displayFlightResults(flights) {
 }
 
 function confirmBooking(flight) {
-  localStorage.setItem("selectedFlight", JSON.stringify(flight)); // Store the flight in localStorage
-  showPage("confirmation"); // Display the confirmation page
-  updateConfirmationPage(); // Update the confirmation page details
+  localStorage.setItem("selectedFlight", JSON.stringify(flight));
+  showPage("confirmation");
+  updateConfirmationPage(flight);
 }
 
-function updateConfirmationPage() {
-  const selectedFlight = JSON.parse(localStorage.getItem("selectedFlight"));
-  if (selectedFlight) {
-    // Update existing elements to display the flight information
-    document.getElementById("top-destination").textContent =
-      selectedFlight.arr_iata; // Assuming destination is the arrival airport
+function updateConfirmationPage(flight) {
+  const location = db.locations.find((loc) => loc.airport === flight.arr_iata);
+
+  if (location) {
+    document.getElementById("top-destination").textContent = location.name;
     document.getElementById("top-budget").textContent =
-      `Flight Number: ${selectedFlight.flight_number}`;
-    document.getElementById("top-info").textContent =
-      `Departure: ${selectedFlight.dep_time} - Arrival: ${selectedFlight.arr_estimated}`;
+      `$${location.about.budget}`;
+    document.getElementById("top-tags").textContent =
+      location.about.tags.join(", ");
+    document.getElementById("top-info").textContent = location.about.info;
+  } else {
+    document.getElementById("top-destination").textContent =
+      "Destination not found.";
   }
 }
 
