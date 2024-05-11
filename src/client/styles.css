@@ -304,6 +304,22 @@ legend {
 
 /* Style for the headers in each flight card for emphasis */
 .flight-card strong {
-  color: #007BFF;              /* Blue color for headers */
+  color: #0097b2;              /* Blue color for headers */
   margin-right: 5px;           /* Space after header before text */
+}
+
+.flightButton {
+  margin-bottom: 20px;
+}
+
+.quizButton {
+  margin-bottom: 20px;
+}
+
+img {
+  width: 100%;
+}
+
+.slideshowDots {
+  text-align: center;
 }
