@@ -145,30 +145,6 @@ export const locations = [
   }
 ];
 
-//export const mockFlights = [
-  //{
-    //flightNumber: "FL123",
-    //airline: "United Airlines",
-    //departureTime: "10:00 AM",
-    //arrivalTime: "12:00 PM",
-    //price: "$150",
-  //},
-  //{
-    //flightNumber: "FL456",
-    //airline: "JetBlue Airlines",
-    //departureTime: "1:00 PM",
-    //arrivalTime: "3:00 PM",
-    //price: "$200",
-  //},
-  //{
-    //flightNumber: "FL789",
-    //airline: "Delta Airlines",
-    //departureTime: "4:00 PM",
-    //arrivalTime: "6:00 PM",
-    //price: "$250",
-  //},
-//];
-
 /**
  * Retrieves a value by name from a list of response objects.
  * @param {string} name - The name to search for in the responses.

@@ -14,7 +14,7 @@ export function showPage(pageId) {
   // Populate the 'to' dropdown for flights with airport codes
   if (pageId === "flights") {
     const flightError = document.getElementById("flightError");
-    flightError.innerHTML = "";
+    flightError.innerHTML = ""; // Clear any previous error messages
 
     const toAirportSelect = document.getElementById("toAirport");
     toAirportSelect.innerHTML = ""; // Clear existing options
@@ -278,7 +278,6 @@ document.addEventListener("DOMContentLoaded", function () {
   flightButton.addEventListener("click", () => showPage("flights"));
   quizButton.addEventListener("click", () => showPage("quiz"));
   clearResultsButton.addEventListener("click", clearResults);
-  //searchFlightsButton.addEventListener("click", showPage("flightResults"));
 
   homeLink.addEventListener("click", (e) => {
     e.preventDefault();
@@ -318,19 +317,3 @@ document.addEventListener("DOMContentLoaded", function () {
     quizForm.reset();
     db.clearScores();
   });
-
-  /**Check for stored quiz responses and display results or show quiz*/
-  
-  /** const storedResponses = localStorage.getItem("quizResponses");
-  if (storedResponses) {
-    quizLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      showPage("results");
-    });
-  } else {
-    quizLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      showPage("quiz");
-    });
-  }
-}); */

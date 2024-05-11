@@ -1,33 +1,5 @@
-// import express from "express";
-// import path from 'path';
-// const __dirname = path.resolve();
-// const app = express();
-// const port = 3000;
-
-// app.listen(port, () => {
-//   console.log(`Destination Vacation server listening on port ${port}`);
-// });
-
-// app.use(express.static('./src/client'));
-
-// app.get('/', function(req, res) {
-//     res.sendFile(path.join(__dirname, './src/client/index.html'));
-// });
-
-// app.post('/', (req, res) => {
-//     res.send('Got a POST request: ' + req.body);
-// });
-
-// app.put('/', (req, res) => {
-//     res.send('Got a PUT request: ' + req.body);
-// });
-
-// app.delete('/', (req, res) => {
-//     res.send('Got a DELETE request: ' + req.body);
-// });
-
 import express from 'express';
-import fetch from 'node-fetch'; // please install this first: npm install node-fetch
+import fetch from 'node-fetch';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -58,10 +30,6 @@ app.get('/api/advanced-flights-schedules', async (req, res) => {
     }
 });
 
-
-// please run the server by the following commands:
-// cd src -> cd server -> node server.js
-// You will also see that there is a change in the port number. It was when I created the proxy server. Feel free to change that to 3000 if you want.
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
