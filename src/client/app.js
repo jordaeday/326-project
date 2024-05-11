@@ -13,6 +13,9 @@ export function showPage(pageId) {
 
   // Populate the 'to' dropdown for flights with airport codes
   if (pageId === "flights") {
+    const flightError = document.getElementById("flightError");
+    flightError.innerHTML = "";
+
     const toAirportSelect = document.getElementById("toAirport");
     toAirportSelect.innerHTML = ""; // Clear existing options
 
@@ -187,6 +190,7 @@ async function fetchFlightSchedules(depIata, arrIata, date) {
   const url = `/api/advanced-flights-schedules?iataCode=${depIata}&type=departure`;
 
   try {
+    const flightError = document.getElementById("flightError");
     const response = await fetch(url);
     const data = await response.json();
     console.log(data);
@@ -198,7 +202,7 @@ async function fetchFlightSchedules(depIata, arrIata, date) {
     ).slice(0, 5);
 
     if(filteredFlights.length === 0) {
-      document.getElementById("flightError").innerHTML = "No flights found for the selected route.";
+      flightError.innerHTML = "No flights found for the selected route.";
     }
 
     console.log("Filtered Flights:", filteredFlights);
