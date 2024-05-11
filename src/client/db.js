@@ -220,7 +220,7 @@ export function calculateScore(location, responses) {
 
   /** Language questions */
   const languageAnswers = responses
-    .filter((obj) => obj.name === "languages")
+    .filter((obj) => obj.class === "languages")
     .map((obj) => obj.value);
   const locationLanguages = location.about.language;
   if (languageAnswers.some((elem) => locationLanguages.includes(elem)))
