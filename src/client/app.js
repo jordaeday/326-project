@@ -197,6 +197,10 @@ async function fetchFlightSchedules(depIata, arrIata, date) {
       flight.arr_iata === arrIata
     ).slice(0, 5);
 
+    if(filteredFlights.length === 0) {
+      document.getElementById("flightError").innerHTML = "No flights found for the selected route.";
+    }
+
     console.log("Filtered Flights:", filteredFlights);
     return filteredFlights;
   } catch (error) {
@@ -241,6 +245,10 @@ async function handleFlightSearch(event) {
   const date = document.getElementById("departureDate").value;
 
   const flightResults = await fetchFlightSchedules(fromIata, toIata, date);
+
+  if (flightResults.length === 0) {
+    return;
+  }
   displayFlightResults(flightResults);
 }
 
