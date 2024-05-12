@@ -199,7 +199,7 @@ async function fetchFlightSchedules(depIata, arrIata, date) {
 
     const filteredFlights = data.data
       .filter(
-        (flight) => flight.dep_iata === depIata && flight.arr_iata === arrIata
+        (flight) => flight.dep_iata === depIata && flight.arr_iata ===  && flight.dep_time.includes(date)
       )
       .slice(0, 5);
 
