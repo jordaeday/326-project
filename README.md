@@ -6,8 +6,9 @@ A website to accomodate your travel needs!
 
 In the terminal, paste 
 ```bash
-npm run milestone-02
+npm start
 ```
+and then go to http://localhost:3001/
 
 ## Structure:
 
